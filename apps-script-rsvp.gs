@@ -13,20 +13,25 @@ function doGet(e) {
 }
 
 function doPost(e) {
+  const now = new Date();
   try {
     const data = JSON.parse(e.postData.contents);
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
     if (!sheet) throw new Error('Sheet "' + SHEET_NAME + '" introuvable');
 
-    // Anti-doublon simple : si email + présence + nombre invités identiques dans les 60 dernières secondes
-    const lastRows = sheet.getRange(Math.max(2, sheet.getLastRow() - 20), 1, Math.min(20, sheet.getLastRow() - 1), 11).getValues();
-    const now = new Date();
-    for (const r of lastRows) {
-      const ts = r[0];
-      if (ts && (now - ts) < 60000 && r[1] === data.email && r[5] === data.nb_invites) {
-        return ContentService
-          .createTextOutput(JSON.stringify({ ok: true, dedup: true }))
-          .setMimeType(ContentService.MimeType.JSON);
+    // Anti-doublon simple : si email + nombre invités identiques dans les 60 dernières secondes
+    const lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      const startRow = Math.max(2, lastRow - 20);
+      const numRows = Math.min(20, lastRow - 1);
+      const lastRows = sheet.getRange(startRow, 1, numRows, 11).getValues();
+      for (const r of lastRows) {
+        const ts = r[0];
+        if (ts && (now - ts) < 60000 && r[1] === data.email && r[5] === data.nb_invites) {
+          return ContentService
+            .createTextOutput(JSON.stringify({ ok: true, dedup: true }))
+            .setMimeType(ContentService.MimeType.JSON);
+        }
       }
     }
 
@@ -43,7 +48,7 @@ function doPost(e) {
       JSON.stringify(data.guests || []),
       data.chanson || '',
       data.message || '',
-      (e && e.parameter && e.parameter.userAgent) || '',
+      '',
       'ghelleu.github.io/mariage-sg'
     ];
     sheet.appendRow(row);
