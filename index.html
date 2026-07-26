@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sissi & Guillaume — La fête au Château · 5 & 6 décembre 2026</title>
+  <meta name="description" content="Save the date — Sissi et Guillaume vous donnent rendez-vous les 5 & 6 décembre 2026 au Château de Montplaisant, à Montagnat.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="nav">
+    <a href="#histoire" class="nav__link">NOTRE HISTOIRE</a>
+    <span class="nav__sep">·</span>
+    <a href="#programme" class="nav__link">PROGRAMME</a>
+    <span class="nav__sep">·</span>
+    <a href="#lieu" class="nav__link">LIEU</a>
+    <span class="nav__sep">·</span>
+    <a href="#acces" class="nav__link">ACCÈS</a>
+    <span class="nav__sep">·</span>
+    <a href="#hebergement" class="nav__link">HÉBERGEMENT</a>
+    <span class="nav__sep">·</span>
+    <a href="#region" class="nav__link">RÉGION</a>
+    <span class="nav__sep">·</span>
+    <a href="#dreamteam" class="nav__link">DREAM TEAM</a>
+    <span class="nav__sep">·</span>
+    <a href="#faq" class="nav__link">FAQ</a>
+    <a href="#rsvp" class="nav__cta">CONFIRMER</a>
+  </nav>
+
+  <!-- Burger menu (mobile only) -->
+  <button class="burger" id="burger" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-menu__close" id="mobile-menu-close" aria-label="Fermer le menu">×</button>
+    <a href="#histoire" class="mobile-menu__link">Notre histoire</a>
+    <a href="#programme" class="mobile-menu__link">Programme</a>
+    <a href="#lieu" class="mobile-menu__link">Lieu</a>
+    <a href="#acces" class="mobile-menu__link">Accès</a>
+    <a href="#hebergement" class="mobile-menu__link">Hébergement</a>
+    <a href="#region" class="mobile-menu__link">Région</a>
+    <a href="#dreamteam" class="mobile-menu__link">Dream team</a>
+    <a href="#faq" class="mobile-menu__link">FAQ</a>
+    <a href="#rsvp" class="mobile-menu__link mobile-menu__cta">Confirmer</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <!-- Logo / monogramme -->
+    <div class="hero__logo">
+      <span class="hero__logo-s">S</span>
+      <span class="hero__logo-amp">&amp;</span>
+      <span class="hero__logo-g">G</span>
+    </div>
+
+    <!-- Crest / château illustration -->
+    <div class="hero__crest" aria-hidden="true">
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- Château -->
+        <g fill="#D84C3C">
+          <rect x="120" y="220" width="160" height="140"/>
+          <rect x="100" y="180" width="40" height="180"/>
+          <rect x="260" y="180" width="40" height="180"/>
+          <!-- Créneaux -->
+          <rect x="100" y="160" width="40" height="20"/>
+          <rect x="140" y="160" width="20" height="20"/>
+          <rect x="180" y="160" width="20" height="20"/>
+          <rect x="220" y="160" width="20" height="20"/>
+          <rect x="260" y="160" width="40" height="20"/>
+        </g>
+        <!-- Bois de cerf -->
+        <g fill="#D84C3C">
+          <path d="M 180 180 Q 160 130 170 100 Q 180 80 200 90 Q 220 80 230 100 Q 240 130 220 180"/>
+          <path d="M 165 130 L 145 100 M 175 110 L 155 80 M 195 95 L 195 70 M 215 110 L 235 80 M 225 130 L 245 100"/>
+        </g>
+        <!-- Drapeaux -->
+        <g fill="#1A1A3E">
+          <rect x="115" y="140" width="10" height="25"/>
+          <rect x="275" y="140" width="10" height="25"/>
+        </g>
+        <!-- Alliances entrecroisées -->
+        <g fill="none" stroke="#FFFFFF" stroke-width="4">
+          <circle cx="180" cy="390" r="20"/>
+          <circle cx="220" cy="390" r="20"/>
+        </g>
+        <!-- Socle -->
+        <rect x="80" y="360" width="240" height="30" fill="#5B2C82"/>
+      </svg>
+    </div>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow">SAVE THE DATE</p>
+      <h1 class="hero__title">5 &amp; 6 décembre 2026</h1>
+      <p class="hero__subtitle">La fête au Château</p>
+      <p class="hero__place">Château de Montplaisant · Montagnat</p>
+
+      <!-- Compte à rebours -->
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="countdown__cell">
+          <span class="countdown__num" data-unit="days">--</span>
+          <span class="countdown__label">Jours</span>
+        </div>
+        <div class="countdown__cell">
+          <span class="countdown__num" data-unit="hours">--</span>
+          <span class="countdown__label">Heures</span>
+        </div>
+        <div class="countdown__cell">
+          <span class="countdown__num" data-unit="minutes">--</span>
+          <span class="countdown__label">Min</span>
+        </div>
+        <div class="countdown__cell">
+          <span class="countdown__num" data-unit="seconds">--</span>
+          <span class="countdown__label">Sec</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bande verte décorative (séparateur) -->
+    <div class="band-green" aria-hidden="true"></div>
+  </header>
+
+  <!-- ===== I. NOTRE HISTOIRE ===== -->
+  <section class="story" id="histoire">
+    <div class="section-marker">
+      <span class="section-marker__roman">I</span>
+    </div>
+    <p class="story__eyebrow">VOUS AVEZ LOUPE UN EPISODE ?</p>
+    <h2 class="story__title">Notre Histoire</h2>
+    <p class="story__intro">Huit songes d'un herbier sentimental pour découvrir comment deux chimères ont fini par se trouver.</p>
+
+    <!-- Episodes -->
+    <div class="story__episode story__episode--left">
+      <div class="story__illu" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Table de café avec 2 personnages -->
+          <rect x="40" y="120" width="120" height="60" fill="#8B4513" rx="4"/>
+          <circle cx="70" cy="100" r="20" fill="#1A1A3E"/>
+          <circle cx="130" cy="100" r="20" fill="#D84C3C"/>
+          <!-- Théière -->
+          <ellipse cx="100" cy="100" rx="15" ry="12" fill="#C9A961"/>
+          <path d="M 100 88 L 100 76 L 95 80 M 100 76 L 105 80" stroke="#C9A961" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
+      <div class="story__content">
+        <p class="story__date">ÉTÉ 2023</p>
+        <h3 class="story__episode-title">Le Café Guidoline</h3>
+        <p>Sissi et Guillaume commencent à travailler ensemble sur un même projet, attablés au Café Guidoline à Genève. Ça deviendra leur QG, chargé de souvenirs.</p>
+      </div>
+    </div>
+
+    <div class="story__divider" aria-hidden="true"></div>
+
+    <div class="story__episode story__episode--right">
+      <div class="story__illu" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Créature bleu-oiseau avec enfants -->
+          <ellipse cx="100" cy="100" rx="50" ry="30" fill="#4169E1"/>
+          <path d="M 50 100 L 30 110 L 50 115" fill="#D84C3C"/>
+          <path d="M 150 100 L 170 110 L 150 115" fill="#D84C3C"/>
+          <circle cx="80" cy="80" r="15" fill="#FFD700"/>
+          <circle cx="120" cy="80" r="15" fill="#FFD700"/>
+          <!-- Etoile -->
+          <polygon points="100,40 105,55 120,55 108,65 113,80 100,70 87,80 92,65 80,55 95,55" fill="#FFA500"/>
+        </svg>
+      </div>
+      <div class="story__content">
+        <p class="story__date">UN BEAU SOIR D'ÉTÉ 2023</p>
+        <h3 class="story__episode-title">La Jetée</h3>
+        <p>Ils finalisent enfin leur projet avant de partir à Miami pour le présenter quelques jours plus tard. Ce soir-là, ils n'ont pas très envie de se quitter, et s'embrassent sur la jetée au bord du lac Léman, sous les étoiles.</p>
+      </div>
+    </div>
+
+    <div class="story__divider" aria-hidden="true"></div>
+
+    <div class="story__episode story__episode--left">
+      <div class="story__illu" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Valise avec palmiers -->
+          <rect x="60" y="80" width="80" height="80" fill="#D84C3C" rx="4"/>
+          <rect x="95" y="60" width="10" height="20" fill="#1A1A3E"/>
+          <!-- Palmier Miami -->
+          <path d="M 40 160 Q 35 130 45 110" stroke="#228B22" stroke-width="3" fill="none"/>
+          <ellipse cx="40" cy="110" rx="15" ry="6" fill="#228B22" transform="rotate(-20 40 110)"/>
+          <ellipse cx="50" cy="110" rx="15" ry="6" fill="#228B22" transform="rotate(20 50 110)"/>
+          <!-- Building NYC -->
+          <rect x="140" y="100" width="20" height="60" fill="#1A1A3E"/>
+          <rect x="155" y="80" width="15" height="80" fill="#4169E1"/>
+        </svg>
+      </div>
+      <div class="story__content">
+        <p class="story__date">JUIN 2023</p>
+        <h3 class="story__episode-title">Miami, New York &amp; Jazz</h3>
+        <p>Ils s'envolent pour Miami et partagent la scène pour animer une conférence ensemble. Le soir, au bord de la plage, une averse leur tombe dessus. Cette fois, c'est sûr : il y a quelque chose d'électrique entre eux. Ils s'embrassent de nouveau et s'envolent pour New York dès le lendemain. Entre deux réunions, ils s'enfuient dans la ville pour écouter du jazz au Roxy Bar et faire un karaoké.</p>
+      </div>
+    </div>
+
+    <div class="story__divider" aria-hidden="true"></div>
+
+    <div class="story__episode story__episode--right">
+      <div class="story__illu" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Maison avec jambes -->
+          <rect x="70" y="80" width="60" height="60" fill="#FFA500"/>
+          <polygon points="60,80 100,50 140,80" fill="#D84C3C"/>
+          <rect x="90" y="110" width="20" height="30" fill="#4169E1"/>
+          <!-- Jambes -->
+          <rect x="80" y="140" width="8" height="40" fill="#1A1A3E"/>
+          <rect x="112" y="140" width="8" height="40" fill="#1A1A3E"/>
+        </svg>
+      </div>
+      <div class="story__content">
+        <p class="story__date">DÉCEMBRE 2023</p>
+        <h3 class="story__episode-title">Rue de la Navigation</h3>
+        <p>Ils emménagent ensemble rue de la Navigation, à Genève. Leur premier appartement connaît de grands moments de bonheur et des fêtes dantesques.</p>
+      </div>
+    </div>
+
+    <div class="story__divider" aria-hidden="true"></div>
+
+    <div class="story__episode story__episode--left">
+      <div class="story__illu" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Test de grossesse + fleurs -->
+          <rect x="90" y="80" width="20" height="80" fill="#FFFFFF" stroke="#1A1A3E" stroke-width="2"/>
+          <rect x="95" y="100" width="3" height="10" fill="#D84C3C"/>
+          <rect x="102" y="100" width="3" height="10" fill="#D84C3C"/>
+          <circle cx="50" cy="50" r="15" fill="#FF1493"/>
+          <circle cx="150" cy="50" r="15" fill="#9932CC"/>
+          <circle cx="50" cy="150" r="15" fill="#FFA500"/>
+        </svg>
+      </div>
+      <div class="story__content">
+        <p class="story__date">FÉVRIER 2024</p>
+        <h3 class="story__episode-title">Plot Twist</h3>
+        <p>Deux petites barres sur un test — et toute la suite de l'histoire qui bascule. La plus belle des surprises s'annonce.</p>
+      </div>
+    </div>
+
+    <div class="story__divider" aria-hidden="true"></div>
+
+    <div class="story__episode story__episode--right">
+      <div class="story__illu" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bébé dans un berceau -->
+          <ellipse cx="100" cy="120" rx="50" ry="20" fill="#D84C3C"/>
+          <circle cx="100" cy="100" r="25" fill="#FFD4B8"/>
+          <circle cx="90" cy="95" r="3" fill="#1A1A3E"/>
+          <circle cx="110" cy="95" r="3" fill="#1A1A3E"/>
+          <!-- Ailes anges -->
+          <ellipse cx="60" cy="100" rx="20" ry="10" fill="#4169E1" transform="rotate(-20 60 100)"/>
+          <ellipse cx="140" cy="100" rx="20" ry="10" fill="#4169E1" transform="rotate(20 140 100)"/>
+        </svg>
+      </div>
+      <div class="story__content">
+        <p class="story__date">19 OCTOBRE 2024 · 6H25</p>
+        <h3 class="story__episode-title">Ozzy</h3>
+        <p>Ozzy rejoint la famille le 19 octobre 2024 à 6h25. Elle est minuscule et merveilleuse.</p>
+      </div>
+    </div>
+
+    <div class="story__divider" aria-hidden="true"></div>
+
+    <div class="story__episode story__episode--left">
+      <div class="story__illu" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Canard stylisé -->
+          <ellipse cx="100" cy="120" rx="50" ry="30" fill="#4169E1"/>
+          <circle cx="60" cy="100" r="20" fill="#4169E1"/>
+          <path d="M 40 100 L 30 105 L 40 110" fill="#D84C3C"/>
+          <circle cx="55" cy="95" r="3" fill="#1A1A3E"/>
+          <!-- Ornements dorés -->
+          <circle cx="100" cy="120" r="8" fill="#C9A961"/>
+          <circle cx="130" cy="115" r="5" fill="#C9A961"/>
+        </svg>
+      </div>
+      <div class="story__content">
+        <p class="story__date">DÉCEMBRE 2025</p>
+        <h3 class="story__episode-title">La Demande</h3>
+        <p>Guillaume emmène Sissi et Ozzy faire une balade. Il fait tellement froid que Sissi traîne du pied... Il la convainque de marcher au bord du lac, car Ozzy a (soi-disant) envie de voir des canards. Il pose un genou à terre. Ozzy n'en croit pas ses yeux — enfin, si elle regarde la bonne direction&nbsp;!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== II. PROGRAMME ===== -->
+  <section class="program" id="programme">
+    <div class="section-marker">
+      <span class="section-marker__roman">II</span>
+    </div>
+    <p class="program__eyebrow">LE DÉROULEMENT</p>
+    <h2 class="program__title">Programme du week-end</h2>
+    <p class="program__intro">Trois jours de fête hivernale au château.</p>
+
+    <div class="program__grid">
+
+      <!-- Vendredi -->
+      <article class="program__day">
+        <div class="program__illu" aria-hidden="true">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Caravane / cheval chargé -->
+            <ellipse cx="100" cy="140" rx="40" ry="20" fill="#8B4513"/>
+            <circle cx="65" cy="120" r="15" fill="#D84C3C"/>
+            <rect x="85" y="100" width="60" height="40" fill="#FFA500" rx="4"/>
+            <circle cx="60" cy="170" r="8" fill="#1A1A3E"/>
+            <circle cx="140" cy="170" r="8" fill="#1A1A3E"/>
+          </svg>
+        </div>
+        <h3 class="program__day-name">Vendredi</h3>
+        <p class="program__day-date">4 DÉCEMBRE 2026</p>
+        <h4 class="program__day-subtitle">Premières arrivées</h4>
+        <p>Le vendredi se déroule en petit comité au château avec la famille proche, les témoins et les officiants qui y séjournent. L'occasion de passer du temps ensemble, de finaliser les derniers préparatifs et de partager un dîner en toute simplicité.</p>
+        <p>Les autres invités sont les bienvenus dès le vendredi pour profiter de la région avant les festivités — voir «&nbsp;La région&nbsp;». Si vous préférez arriver le samedi matin, aucun problème.</p>
+      </article>
+
+      <!-- Samedi -->
+      <article class="program__day program__day--featured">
+        <div class="program__illu" aria-hidden="true">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Deux créatures échangeant des alliances -->
+            <ellipse cx="70" cy="100" rx="30" ry="40" fill="#4169E1"/>
+            <ellipse cx="130" cy="100" rx="30" ry="40" fill="#D84C3C"/>
+            <circle cx="100" cy="100" r="12" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+            <circle cx="115" cy="100" r="12" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+          </svg>
+        </div>
+        <h3 class="program__day-name">Samedi</h3>
+        <p class="program__day-date">5 DÉCEMBRE 2026</p>
+        <h4 class="program__day-subtitle">Le Grand Jour</h4>
+
+        <div class="program__slot">
+          <p class="program__slot-name">Matinée · Préparatifs</p>
+          <p>Dès votre arrivée, nous vous accueillerons dans la région et préparerez-vous pour la fête. Des professionnels seront disponibles au château pour le maquillage et la coiffure (à préciser dans le formulaire de réponse).</p>
+        </div>
+
+        <div class="program__slot">
+          <p class="program__slot-time">14h30</p>
+          <p class="program__slot-name">Rendez-vous au château</p>
+          <p>Accueil des invités autour d'une boisson chaude.</p>
+        </div>
+
+        <div class="program__slot">
+          <p class="program__slot-time">15h30</p>
+          <p class="program__slot-name">Cérémonie laïque</p>
+          <p>Échange de vœux dans l'Orangerie du château.</p>
+        </div>
+
+        <div class="program__slot">
+          <p class="program__slot-time">16h30</p>
+          <p class="program__slot-name">Vin d'honneur</p>
+          <p>Retrouvons-nous dans les salons du château pour le vin d'honneur, accompagné par les Has Been Players.</p>
+        </div>
+
+        <div class="program__slot">
+          <p class="program__slot-time">19h00</p>
+          <p class="program__slot-name">Dîner</p>
+          <p>Un grand dîner d'hiver aux chandelles nous attend dans l'Orangerie.</p>
+        </div>
+
+        <div class="program__slot">
+          <p class="program__slot-time">21h00</p>
+          <p class="program__slot-name">Soirée</p>
+          <p>DJ Ron aux platines jusqu'au bout de la nuit.</p>
+        </div>
+      </article>
+
+      <!-- Dimanche -->
+      <article class="program__day">
+        <div class="program__illu" aria-hidden="true">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Théière bleue -->
+            <ellipse cx="100" cy="120" rx="50" ry="30" fill="#4169E1"/>
+            <path d="M 50 120 Q 30 130 40 145" stroke="#4169E1" stroke-width="6" fill="none"/>
+            <rect x="130" y="100" width="30" height="6" fill="#4169E1"/>
+            <ellipse cx="100" cy="100" rx="20" ry="8" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <h3 class="program__day-name">Dimanche</h3>
+        <p class="program__day-date">6 DÉCEMBRE 2026</p>
+        <h4 class="program__day-subtitle">Brunch de clôture</h4>
+        <p>On sait qu'il faudra probablement plus qu'un café pour remettre tout le monde sur pied, alors rendez-vous dans l'Orangerie pour un brunch digne de ce nom avant de continuer le weekend.</p>
+        <p>Vous êtes chaleureusement conviés à rester profiter avec nous aussi longtemps que possible. Le château reste à notre disposition jusqu'à lundi.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== III. LE CHÂTEAU ===== -->
+  <section class="castle" id="lieu">
+    <div class="section-marker">
+      <span class="section-marker__roman">III</span>
+    </div>
+    <p class="castle__eyebrow">DÉCOUVREZ LE LIEU</p>
+    <h2 class="castle__title">Le Château de Montplaisant</h2>
+    <p class="castle__intro">Une demeure de caractère nichée à Montagnat, à cinq minutes de Bourg-en-Bresse.</p>
+    <p class="castle__lead">Cour, salons et Orangerie nous accueillent pour trois jours hors du temps.</p>
+
+    <div class="castle__illu" aria-hidden="true">
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Château illustration -->
+        <rect x="80" y="150" width="240" height="120" fill="#FFB6C1"/>
+        <rect x="60" y="120" width="40" height="150" fill="#FFB6C1"/>
+        <rect x="300" y="120" width="40" height="150" fill="#FFB6C1"/>
+        <!-- Créneaux -->
+        <g fill="#FFB6C1">
+          <rect x="60" y="100" width="40" height="20"/>
+          <rect x="80" y="100" width="20" height="20"/>
+          <rect x="160" y="100" width="20" height="20"/>
+          <rect x="220" y="100" width="20" height="20"/>
+          <rect x="300" y="100" width="40" height="20"/>
+        </g>
+        <!-- Bois de cerf -->
+        <g fill="#D84C3C">
+          <path d="M 180 100 Q 160 50 170 20 Q 180 0 200 10 Q 220 0 230 20 Q 240 50 220 100"/>
+        </g>
+        <!-- Clé géante -->
+        <g transform="translate(40 180)">
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#C9A961" stroke-width="6"/>
+          <rect x="20" y="-3" width="60" height="6" fill="#C9A961"/>
+          <rect x="70" y="-3" width="6" height="15" fill="#C9A961"/>
+          <rect x="80" y="-3" width="6" height="10" fill="#C9A961"/>
+        </g>
+        <!-- Fenêtres -->
+        <g fill="#1A1A3E">
+          <rect x="120" y="180" width="20" height="30"/>
+          <rect x="160" y="180" width="20" height="30"/>
+          <rect x="220" y="180" width="20" height="30"/>
+          <rect x="260" y="180" width="20" height="30"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== IV. GALERIE ===== -->
+  <section class="gallery" id="galerie">
+    <div class="section-marker">
+      <span class="section-marker__roman">IV</span>
+    </div>
+    <h2 class="gallery__title">Découvrez le château en images</h2>
+
+    <div class="gallery__grid">
+      <a href="assets/photos/58762bebecc517f2c733b648a8bf98c1026d23aa.jpg" class="gallery__item" data-lightbox>
+        <img src="assets/photos/58762bebecc517f2c733b648a8bf98c1026d23aa.jpg" alt="Salle de réception du château" loading="lazy">
+      </a>
+      <a href="assets/photos/552102dc1b55bc5981c6b23fee164d86ce8b0288.png" class="gallery__item" data-lightbox>
+        <img src="assets/photos/552102dc1b55bc5981c6b23fee164d86ce8b0288.png" alt="Espace événement" loading="lazy">
+      </a>
+      <a href="assets/photos/9c9af4365293aae3b789a4009a6558a36161c046.jpg" class="gallery__item" data-lightbox>
+        <img src="assets/photos/9c9af4365293aae3b789a4009a6558a36161c046.jpg" alt="Vue intérieure" loading="lazy">
+      </a>
+      <a href="assets/photos/65d3a7789765309a582a017bdc27bc1bd5116248.jpg" class="gallery__item" data-lightbox>
+        <img src="assets/photos/65d3a7789765309a582a017bdc27bc1bd5116248.jpg" alt="Plan d'étage" loading="lazy">
+      </a>
+      <a href="assets/photos/0aaa6a27a020e04dec4a8e9e8e48f98c6ff16562.jpg" class="gallery__item" data-lightbox>
+        <img src="assets/photos/0aaa6a27a020e04dec4a8e9e8e48f98c6ff16562.jpg" alt="Plan du château" loading="lazy">
+      </a>
+      <a href="assets/photos/f862c662859451942595d8490db4cfb30d77651f.png" class="gallery__item" data-lightbox>
+        <img src="assets/photos/f862c662859451942595d8490db4cfb30d77651f.png" alt="Plan détaillé" loading="lazy">
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== V. ACCÈS ===== -->
+  <section class="access" id="acces">
+    <div class="section-marker">
+      <span class="section-marker__roman">V</span>
+    </div>
+    <p class="access__eyebrow">ACCES &amp; TRANSPORT</p>
+    <h2 class="access__title">Comment venir</h2>
+    <p class="access__address">CHEMIN DE LA FAY, 01250 MONTAGNAT</p>
+
+    <div class="access__map">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=5.30%2C46.18%2C5.35%2C46.22&amp;layer=mapnik&amp;marker=46.2008%2C5.3278"
+        title="Carte du château de Montplaisant"
+        loading="lazy"></iframe>
+    </div>
+
+    <div class="access__grid">
+      <div class="access__card">
+        <p class="access__card-from">DEPUIS BOURG-EN-BRESSE</p>
+        <p class="access__card-time">5 min</p>
+        <p class="access__card-mode">en voiture</p>
+      </div>
+      <div class="access__card">
+        <p class="access__card-from">DEPUIS LYON</p>
+        <p class="access__card-time">1 h</p>
+        <p class="access__card-mode">en voiture</p>
+      </div>
+      <div class="access__card">
+        <p class="access__card-from">DEPUIS GENÈVE</p>
+        <p class="access__card-time">1 h 30</p>
+        <p class="access__card-mode">en train ou voiture</p>
+      </div>
+      <div class="access__card">
+        <p class="access__card-from">DEPUIS PARIS</p>
+        <p class="access__card-time">2 h</p>
+        <p class="access__card-mode">en TGV</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VI. HÉBERGEMENT ===== -->
+  <section class="stay" id="hebergement">
+    <div class="section-marker">
+      <span class="section-marker__roman">VI</span>
+    </div>
+    <h2 class="stay__title">Où dormir</h2>
+    <p class="stay__intro">Directement au Château ou dans l'un des hôtels tout proches pour prolonger le week-end sans reprendre la route.</p>
+
+    <div class="stay__list">
+      <article class="stay__card">
+        <h3 class="stay__name">Greet Hôtel Bourg-en-Bresse</h3>
+        <p class="stay__desc">Hôtel éco-responsable labellisé Clef Verte, à 5 min de l'A40. Restaurant sur place, parking sécurisé et bornes de recharge.</p>
+        <p class="stay__distance">5 MIN EN VOITURE</p>
+        <a href="#" class="stay__cta">RÉSERVER</a>
+      </article>
+
+      <article class="stay__card">
+        <h3 class="stay__name">Logis de Brou</h3>
+        <p class="stay__desc">Hôtel 3 étoiles de charme avec balcon, à deux pas du Monastère royal de Brou. 30 chambres au calme.</p>
+        <p class="stay__distance">15 MIN EN VOITURE</p>
+        <a href="#" class="stay__cta">RÉSERVER</a>
+      </article>
+
+      <article class="stay__card">
+        <h3 class="stay__name">Clos de Mont July</h3>
+        <p class="stay__desc">Maison d'hôtes de caractère à Ceyzeriat, demeure historique de 1802. Parc arboré, petit-déjeuner maison. Noté 9.5/10.</p>
+        <p class="stay__distance">10 MIN EN VOITURE</p>
+        <a href="#" class="stay__cta">RÉSERVER</a>
+      </article>
+
+      <article class="stay__card">
+        <h3 class="stay__name">The Originals Boutique</h3>
+        <p class="stay__desc">Hôtel 3 étoiles de style Second Empire avec parc de 5000 m². Chambres rénovées face à la gare de Bourg-en-Bresse.</p>
+        <p class="stay__distance">5 MIN EN VOITURE</p>
+        <a href="#" class="stay__cta">RÉSERVER</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== VII. RÉGION ===== -->
+  <section class="region" id="region">
+    <div class="section-marker">
+      <span class="section-marker__roman">VII</span>
+    </div>
+    <p class="region__eyebrow">EXPLORER</p>
+    <h2 class="region__title">Découvrir la région</h2>
+    <p class="region__intro">Profitez de votre séjour pour découvrir le meilleur de la Bresse et de la Bourgogne.</p>
+
+    <div class="region__list">
+      <article class="region__item">
+        <p class="region__distance">À 15 MIN – BOURG-EN-BRESSE</p>
+        <h3 class="region__name">Monastère Royal de Brou</h3>
+        <p>Chef-d'œuvre de l'art gothique flamboyant du XVIe siècle, élu monument préféré des Français en 2014.</p>
+      </article>
+
+      <article class="region__item">
+        <p class="region__distance">À 1H – BEAUNE · MÂCON</p>
+        <h3 class="region__name">Vignobles de Bourgogne</h3>
+        <p>Capturez les prestigieux vignobles de Bourgogne et dégustez des vins d'exception dans un cadre historique.</p>
+      </article>
+
+      <article class="region__item">
+        <p class="region__distance">À 1H – VIEUX LYON · FOURVIÈRE</p>
+        <h3 class="region__name">Journée à Lyon</h3>
+        <p>Capitale de la gastronomie, Patrimoine mondial UNESCO. Traboules, Presqu'île, Fourvière... une ville incontournable.</p>
+      </article>
+    </div>
+
+    <div class="region__eat">
+      <h3 class="region__eat-title">Où manger ?</h3>
+      <p>Les tables étoilées de Bourg-en-Bresse</p>
+      <a href="https://guide.michelin.com/" target="_blank" rel="noopener" class="region__eat-cta">GUIDE MICHELIN</a>
+    </div>
+  </section>
+
+  <!-- ===== VIII. DREAM TEAM ===== -->
+  <section class="dream" id="dreamteam">
+    <div class="section-marker">
+      <span class="section-marker__roman">VIII</span>
+    </div>
+    <p class="dream__eyebrow">ILS RENDENT CE JOUR SPÉCIAL</p>
+    <h2 class="dream__title">La dream team</h2>
+    <p class="dream__intro">Les talents qui veillent à ce que tout soit parfait.</p>
+
+    <!-- Camille & David -->
+    <details class="dream__card">
+      <summary class="dream__head">
+        <div>
+          <p class="dream__role">OFFICIANTE &amp; CO-OFFICIER — CÉRÉMONIE LAÏQUE</p>
+          <h3 class="dream__name">Camille Lallier &amp; David Granite</h3>
+        </div>
+        <span class="dream__toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="dream__body">
+        <p>«&nbsp;Nos amis les plus chers auront l'honneur de célébrer notre union. Fous rires et émotions garantis&nbsp;!&nbsp;»</p>
+        <p>Camille rencontre Sissi à Paris (CELSA Paris-Sorbonne). David est ami proche du couple depuis de longues années.</p>
+      </div>
+    </details>
+
+    <!-- Emma -->
+    <details class="dream__card">
+      <summary class="dream__head">
+        <div>
+          <p class="dream__role">COORDINATRICE MARIAGE</p>
+          <h3 class="dream__name">Emma Atrous</h3>
+        </div>
+        <span class="dream__toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="dream__body">
+        <p>«&nbsp;Votre point de contact privilégié pour tout ce qui concerne l'organisation du jour J.&nbsp;»</p>
+        <p>Gère les détails, le discours et les surprises du grand jour.</p>
+      </div>
+    </details>
+
+    <!-- Guillaume Blot -->
+    <details class="dream__card">
+      <summary class="dream__head">
+        <div>
+          <p class="dream__role">PHOTOGRAPHE</p>
+          <h3 class="dream__name">Guillaume Blot</h3>
+        </div>
+        <span class="dream__toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="dream__body">
+        <p>«&nbsp;Photographe-documentaire qui flashe la culture populaire française avec un humour tendre&nbsp;»</p>
+        <p>Diplômé du CELSA-La Sorbonne et formé aux Gobelins, il révèle l'extraordinaire dans l'ordinaire. Ses séries Buvettes, Rades (Gallimard) et Restos Routiers dressent la radiographie-hommage d'une France pop et populaire.</p>
+        <a href="https://guillaumenblot.com" target="_blank" rel="noopener">guillaumenblot.com →</a>
+      </div>
+    </details>
+
+    <!-- DJ Ron -->
+    <details class="dream__card">
+      <summary class="dream__head">
+        <div>
+          <p class="dream__role">DJ &amp; MUSIC CURATOR</p>
+          <h3 class="dream__name">DJ Ron</h3>
+        </div>
+        <span class="dream__toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="dream__body">
+        <p>«&nbsp;Aux platines dès 21h pour une soirée Christmas Party inoubliable. Préparez vos plus beaux moves&nbsp;!&nbsp;»</p>
+        <p>DJ français basé à Paris, il joue depuis 12 ans pour des clubs réputés, des hôtels, des marques et des événements. Animé par une curiosité insatiable, il explore de nombreux genres.</p>
+      </div>
+    </details>
+
+    <!-- Manon Bonhomme -->
+    <details class="dream__card">
+      <summary class="dream__head">
+        <div>
+          <p class="dream__role">MAQUILLEUSE PROFESSIONNELLE</p>
+          <h3 class="dream__name">Manon Bonhomme</h3>
+        </div>
+        <span class="dream__toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="dream__body">
+        <p>«&nbsp;Un équilibre entre naturel et sophistiqué, guidé par votre personnalité.&nbsp;»</p>
+        <p>Depuis petite, elle a toujours prêté attention au maquillage des femmes — le mystérieux smoky eyes, les teints légers et ensoleillés. Une certaine idée du chic à la française : juste, lumineux et vivant.</p>
+        <p><a href="#rsvp">→ Inscrivez-vous dans le formulaire de réponse</a></p>
+      </div>
+    </details>
+
+    <!-- Julie Archer -->
+    <details class="dream__card">
+      <summary class="dream__head">
+        <div>
+          <p class="dream__role">COIFFEUSE PROFESSIONNELLE</p>
+          <h3 class="dream__name">Julie Archer</h3>
+        </div>
+        <span class="dream__toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="dream__body">
+        <p>«&nbsp;Spécialisée dans la coiffure de mariée et des invité(e)s – elle vous sublimera sans vous transformer.&nbsp;»</p>
+        <p>Elle vous accompagnera avec douceur et bienveillance dans cette journée si spéciale.</p>
+        <ul class="dream__prices">
+          <li>Brushings, demi-attaches &amp; wavy (cheveux courts) — 60€</li>
+          <li>Coiffures sophistiquées : chignons, demi-attaches, cheveux longs détachés — 90€</li>
+        </ul>
+        <p><a href="#rsvp">→ Inscrivez-vous dans le formulaire de réponse</a></p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq" id="faq">
+    <div class="section-marker section-marker--light">
+      <span class="section-marker__roman">VIII</span>
+    </div>
+    <p class="faq__eyebrow">VOS QUESTIONS</p>
+    <h2 class="faq__title">Questions fréquentes</h2>
+    <p class="faq__intro">Tout ce que vous devez savoir pour le grand jour.</p>
+
+    <div class="faq__list">
+      <details class="faq__item">
+        <summary>Y a-t-il un dress code ?</summary>
+        <div class="faq__answer">
+          <p>Tenue de soirée chic et confortable. On évite le blanc (réservé à la mariée) et on ose les couleurs — c'est un mariage d'hiver après tout&nbsp;!</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Les enfants sont-ils les bienvenus ?</summary>
+        <div class="faq__answer">
+          <p>Bien sûr&nbsp;! Ozzy sera ravie de partager ce jour avec ses petits cousins. Un espace est prévu pour les enfants pendant le dîner et la soirée.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Peut-on venir accompagné(e) ?</summary>
+        <div class="faq__answer">
+          <p>Si votre invitation mentionne « +1 », oui. Sinon, nous vous remercions de venir seul(e) — la liste a été minutieusement établie.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Y a-t-il un cadeau de mariage ?</summary>
+        <div class="faq__answer">
+          <p>Votre présence est notre plus beau cadeau. Pour ceux qui souhaitent contribuer, notre liste de mariage est disponible via le formulaire de réponse.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Jusqu'à quelle heure puis-je rester ?</summary>
+        <div class="faq__answer">
+          <p>Tant que vous voulez — DJ Ron assurera jusqu'au bout de la nuit. Le château reste à disposition jusqu'au lundi.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Comment joindre les mariés en cas d'urgence ?</summary>
+        <div class="faq__answer">
+          <p>Pendant le week-end, contactez Emma au <a href="tel:+33000000000">06 XX XX XX XX</a> ou par e-mail à <a href="mailto:contact@example.com">contact@example.com</a>.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== IX. RSVP ===== -->
+  <section class="rsvp" id="rsvp">
+    <div class="section-marker section-marker--light">
+      <span class="section-marker__roman">IX</span>
+    </div>
+
+    <div class="rsvp__bunny" aria-hidden="true">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Lapin mascotte -->
+        <ellipse cx="100" cy="140" rx="40" ry="35" fill="#FFFFFF"/>
+        <ellipse cx="85" cy="80" rx="10" ry="30" fill="#FFFFFF"/>
+        <ellipse cx="115" cy="80" rx="10" ry="30" fill="#FFFFFF"/>
+        <ellipse cx="85" cy="85" rx="4" ry="20" fill="#FFB6C1"/>
+        <ellipse cx="115" cy="85" rx="4" ry="20" fill="#FFB6C1"/>
+        <circle cx="85" cy="135" r="4" fill="#1A1A3E"/>
+        <circle cx="115" cy="135" r="4" fill="#1A1A3E"/>
+        <ellipse cx="100" cy="150" rx="6" ry="4" fill="#FF1493"/>
+      </svg>
+    </div>
+
+    <p class="rsvp__eyebrow">CONFIRMER VOTRE PRÉSENCE</p>
+    <h2 class="rsvp__title">Le formulaire de réponse</h2>
+    <p class="rsvp__intro">Une seule réponse pour tout votre foyer. Merci de confirmer avant le 1ᵉʳ septembre 2026.</p>
+
+    <a href="https://forms.gle/" target="_blank" rel="noopener" class="rsvp__cta">
+      Répondre au formulaire →
+    </a>
+    <p class="rsvp__note">Votre brouillon est sauvegardé automatiquement.</p>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__logo">
+        <span class="footer__s">S</span><span class="footer__amp">&amp;</span><span class="footer__g">G</span>
+      </div>
+      <p class="footer__date">5 &amp; 6 décembre 2026</p>
+      <p class="footer__place">Château de Montplaisant · Montagnat</p>
+
+      <div class="footer__contact">
+        <p>Une question ? <a href="mailto:contact@example.com">contact@example.com</a></p>
+      </div>
+
+      <p class="footer__signature">Site conçu avec amour pour Sissi &amp; Guillaume · 2026</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
