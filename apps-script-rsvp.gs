@@ -1,10 +1,13 @@
 /**
  * Web app — Réception RSVP mariage S&G
- * À déployer : Extensions > Apps Script > Déployer > Nouvelle déploiement > Web app
+ * v3 — Ajout du jour "lundi 7 déc" pour le brunch prolongé
+ *
+ * À déployer : Extensions > Apps Script > Déployer > Gérer les déploiements > ✏️ > "Nouvelle version" > Déployer
  * Exécuter en tant que : Moi
  * Accès : Tout le monde
  */
 const SHEET_NAME = 'Réponses';
+const RSVP_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyPHna7JcCjBBOLhjDE2tyT76ta2dzoVnLAxejkfLLxCGrje4WnC41sEtuEBEGwMtk/exec';
 
 function doGet(e) {
   return ContentService
@@ -27,7 +30,7 @@ function doPost(e) {
       const lastRows = sheet.getRange(startRow, 1, numRows, 11).getValues();
       for (const r of lastRows) {
         const ts = r[0];
-        if (ts && (now - ts) < 60000 && r[1] === data.email && r[5] === data.nb_invites) {
+        if (ts && (now - ts) < 60000 && r[1] === data.email && r[5] === (data.guests || []).length) {
           return ContentService
             .createTextOutput(JSON.stringify({ ok: true, dedup: true }))
             .setMimeType(ContentService.MimeType.JSON);
@@ -35,8 +38,11 @@ function doPost(e) {
       }
     }
 
+    // v3 : mapping jours (inclut 'lun' = Lundi 7 déc)
     const jours = (data.jours || data.days || {});
-    const joursStr = ['ven', 'sam', 'dim'].filter(k => jours[k]).map(k => ({ven: 'Ven 4', sam: 'Sam 5', dim: 'Dim 6'}[k])).join(', ');
+    const joursMap = { ven: 'Ven 4', sam: 'Sam 5', dim: 'Dim 6', lun: 'Lun 7' };
+    const ordre = ['ven', 'sam', 'dim', 'lun'];
+    const joursStr = ordre.filter(k => jours[k]).map(k => joursMap[k]).join(', ');
 
     const row = [
       now,
@@ -48,8 +54,8 @@ function doPost(e) {
       JSON.stringify(data.guests || []),
       data.chanson || '',
       data.message || '',
-      '',
-      'ghelleu.github.io/mariage-sg'
+      e.parameter && e.parameter.userAgent ? e.parameter.userAgent : '',
+      'mariage-au-chateau.xyz'
     ];
     sheet.appendRow(row);
 
