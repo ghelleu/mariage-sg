@@ -787,7 +787,7 @@ textarea.input{min-height:130px;resize:vertical}
 <script>
 /* ---------- FIT DESKTOP CANVAS TO VIEWPORT ---------- */
 const PAGE=document.getElementById('page');
-function fitPage(){PAGE.style.zoom=window.innerWidth>=769?Math.min(1,window.innerWidth/1920).toString():'1';if(window._map)setTimeout(()=>window._map.invalidateSize(),60);}
+function fitPage(){PAGE.style.zoom=window.innerWidth>=769?Math.min(1,window.innerWidth/1920).toString():'';if(window._map)setTimeout(()=>window._map.invalidateSize(),60);}
 fitPage();window.addEventListener('resize',fitPage);
 /* ---------- MOBILE MENU ---------- */
 const burger=document.getElementById('burger'),mob=document.getElementById('mobmenu');
