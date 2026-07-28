@@ -813,7 +813,7 @@ tick();setInterval(tick,1000);
 function initMap(){
   try{
     if(typeof L==='undefined'){document.getElementById('map').innerHTML='<a href="https://www.google.com/maps/search/?api=1&query=Ch%C3%A2teau+de+Montplaisant+Montagnat" target="_blank" rel="noopener" style="display:flex;height:100%;align-items:center;justify-content:center;color:var(--red);font-family:var(--disp);font-size:24px">Ouvrir la carte ↗</a>';return;}
-    const c=[46.1889,5.2918];
+    const c=[46.1725206,5.2937849];
     const map=L.map('map',{scrollWheelZoom:false,attributionControl:true}).setView(c,13);window._map=map;
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:20,attribution:'© OpenStreetMap © CARTO'}).addTo(map);
     const icon=L.divIcon({className:'',html:'<div style="width:26px;height:26px;border-radius:50% 50% 50% 0;background:#DA4326;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4);border:2px solid #F2ECDE"></div>',iconSize:[26,26],iconAnchor:[13,26]});
