@@ -407,18 +407,18 @@ textarea.input{min-height:130px;resize:vertical}
   .faq-q{font-size:18px;padding:20px;line-height:1.3}
   .faq-q .faq-plus{width:20px;height:20px}
   .faq-a{
-    padding:0 20px 20px;
+    padding:0;
     max-height:0;
     overflow:hidden;
-    transition:max-height .35s ease;
+    visibility:hidden;
+    transition:max-height .35s ease,padding .35s ease,visibility 0s linear .35s;
   }
+  .faq-item.open .faq-a{padding:0 20px 20px;max-height:2000px;visibility:visible;transition:max-height .35s ease,padding .35s ease,visibility 0s linear 0s}
   .faq-a p,.faq-a li{font-size:18px;line-height:28px}
   .faq-a p.em{font-size:20px}
   .faq-a-inner{display:flex;flex-direction:column;gap:15px;padding:0 0 20px}
   .faq-a-inner.has-ill{flex-direction:column}
   .faq-ill{width:100%;max-width:250px;margin:0 auto;grid-row:auto;align-self:center}
-  /* Quand ouverte sur mobile, garder la limite max-height du desktop */
-  .faq-item.open .faq-a{max-height:2000px}
 
   /* RSVP (theme sombre sur fond ink) */
   .rsvp{padding:28px 15px 50px;background:var(--ink)}
