@@ -1,13 +1,31 @@
 /**
  * Web app — Réception RSVP mariage S&G
- * v3 — Ajout du jour "lundi 7 déc" pour le brunch prolongé
+ * v4 — Format Sheet "1 ligne par invité" + 4 colonnes jours séparées
  *
  * À déployer : Extensions > Apps Script > Déployer > Gérer les déploiements > ✏️ > "Nouvelle version" > Déployer
  * Exécuter en tant que : Moi
  * Accès : Tout le monde
  */
 const SHEET_NAME = 'Réponses';
+const SHEET_ID = 0; // ID de la feuille "Réponses" (vérifier avec SpreadsheetApp.getActiveSpreadsheet().getSheets()[0].getSheetId())
 const RSVP_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyPHna7JcCjBBOLhjDE2tyT76ta2dzoVnLAxejkfLLxCGrje4WnC41sEtuEBEGwMtk/exec';
+
+// En-têtes (dans l'ordre exact du Sheet)
+const HEADERS = [
+  'Date',                  // A
+  'Email',                 // B
+  'Responsable réservation', // C
+  'Prénom & Nom',          // D
+  'Présence',              // E
+  'Ven 4',                 // F
+  'Sam 5',                 // G
+  'Dim 6',                 // H
+  'Lun 7',                 // I
+  'Menu',                  // J
+  'Allergies',             // K
+  'Chanson',               // L
+  'Message'                // M
+];
 
 function doGet(e) {
   return ContentService
@@ -19,18 +37,21 @@ function doPost(e) {
   const now = new Date();
   try {
     const data = JSON.parse(e.postData.contents);
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName(SHEET_NAME);
     if (!sheet) throw new Error('Sheet "' + SHEET_NAME + '" introuvable');
 
-    // Anti-doublon simple : si email + nombre invités identiques dans les 60 dernières secondes
+    // Anti-doublon simple : si email + N invités identiques dans les 60 dernières secondes
+    const guests = data.guests || [];
+    const nbInvites = guests.length;
     const lastRow = sheet.getLastRow();
     if (lastRow > 1) {
       const startRow = Math.max(2, lastRow - 20);
       const numRows = Math.min(20, lastRow - 1);
-      const lastRows = sheet.getRange(startRow, 1, numRows, 11).getValues();
+      const lastRows = sheet.getRange(startRow, 1, numRows, 13).getValues();
       for (const r of lastRows) {
         const ts = r[0];
-        if (ts && (now - ts) < 60000 && r[1] === data.email && r[5] === (data.guests || []).length) {
+        if (ts && (now - ts) < 60000 && r[1] === data.email && r[3] === (guests[0] && guests[0].nom)) {
           return ContentService
             .createTextOutput(JSON.stringify({ ok: true, dedup: true }))
             .setMimeType(ContentService.MimeType.JSON);
@@ -38,29 +59,75 @@ function doPost(e) {
       }
     }
 
-    // v3 : mapping jours (inclut 'lun' = Lundi 7 déc)
-    const jours = (data.jours || data.days || {});
-    const joursMap = { ven: 'Ven 4', sam: 'Sam 5', dim: 'Dim 6', lun: 'Lun 7' };
-    const ordre = ['ven', 'sam', 'dim', 'lun'];
-    const joursStr = ordre.filter(k => jours[k]).map(k => joursMap[k]).join(', ');
+    // S'assurer que les en-têtes existent (v4 : 13 colonnes)
+    const existingHeaders = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
+    const headersUpToDate = HEADERS.every((h, i) => existingHeaders[i] === h);
+    if (!headersUpToDate) {
+      sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+      // Mise en forme des en-têtes
+      const headerRange = sheet.getRange(1, 1, 1, HEADERS.length);
+      headerRange.setFontWeight('bold');
+      headerRange.setBackground('#f2ecde');
+      sheet.setFrozenRows(1);
+    }
 
-    const row = [
-      now,
-      data.email || '',
-      data.attending === true ? 'OUI' : (data.attending === false ? 'NON' : '?'),
-      joursStr,
-      (data.guests && data.guests[0] && data.guests[0].nom) || '',
-      (data.guests || []).length,
-      JSON.stringify(data.guests || []),
-      data.chanson || '',
-      data.message || '',
-      e.parameter && e.parameter.userAgent ? e.parameter.userAgent : '',
-      'mariage-au-chateau.xyz'
-    ];
-    sheet.appendRow(row);
+    // v4 : jours éclatés en 4 colonnes
+    const jours = (data.jours || data.days || {});
+    const joursCols = {
+      ven: jours.ven ? 'OUI' : 'NON',
+      sam: jours.sam ? 'OUI' : 'NON',
+      dim: jours.dim ? 'OUI' : 'NON',
+      lun: jours.lun ? 'OUI' : 'NON'
+    };
+    const presence = data.attending === true ? 'OUI' : (data.attending === false ? 'NON' : '?');
+
+    // Responsable = nom du guest principal (1er guest)
+    const responsable = (guests[0] && guests[0].nom) || '';
+
+    // v4 : une ligne par invité
+    const rows = guests.map((g, i) => [
+      now,                          // A: Date (identique pour tout le groupe)
+      data.email || '',             // B: Email (identique pour tout le groupe)
+      responsable,                  // C: Responsable réservation (identique pour tout le groupe)
+      g.nom || '',                  // D: Prénom & Nom (cet invité)
+      presence,                     // E: Présence (identique pour tout le groupe)
+      joursCols.ven,                // F
+      joursCols.sam,                // G
+      joursCols.dim,                // H
+      joursCols.lun,                // I
+      g.repas || '',                // J: Menu
+      g.allergies || '',            // K: Allergies
+      i === 0 ? (data.chanson || '') : '',  // L: Chanson (1ère ligne seulement)
+      i === 0 ? (data.message || '') : ''   // M: Message (1ère ligne seulement)
+    ]);
+
+    // Append en bloc (plus rapide que N appendRow)
+    if (rows.length > 0) {
+      const startRow = sheet.getLastRow() + 1;
+      sheet.getRange(startRow, 1, rows.length, HEADERS.length).setValues(rows);
+
+      // Dropdowns OUI/NON sur les colonnes E, F, G, H, I (Présence + 4 jours)
+      const validationRule = SpreadsheetApp.newDataValidation()
+        .requireValueInList(['OUI', 'NON'], true)
+        .setAllowInvalid(false)
+        .build();
+      sheet.getRange(startRow, 5, rows.length, 5).setDataValidation(validationRule);
+
+      // Dropdown Menu sur la colonne J
+      const menuRule = SpreadsheetApp.newDataValidation()
+        .requireValueInList(['viande', 'poisson', 'enfant'], true)
+        .setAllowInvalid(true)
+        .build();
+      sheet.getRange(startRow, 10, rows.length, 1).setDataValidation(menuRule);
+    }
 
     return ContentService
-      .createTextOutput(JSON.stringify({ ok: true, row: sheet.getLastRow() }))
+      .createTextOutput(JSON.stringify({
+        ok: true,
+        rowsAdded: rows.length,
+        firstRow: sheet.getLastRow() - rows.length + 1,
+        lastRow: sheet.getLastRow()
+      }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService
