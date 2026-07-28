@@ -312,10 +312,8 @@ textarea.input{min-height:130px;resize:vertical}
   }
   .chap>*{grid-row:auto!important;grid-column:auto!important}
   /* Ordre mobile : non-rev = image en haut, rev = image en bas (alternance) */
-  .chap:not(.rev) .chap-img{order:1}
-  .chap:not(.rev) .chap-txt{order:2}
-  .chap.rev .chap-img{order:2}
-  .chap.rev .chap-txt{order:1}
+  .chap-img,.chap.rev .chap-img{order:1}
+  .chap-txt,.chap.rev .chap-txt{order:2}
   .chap.rev .chap-txt{align-items:center;text-align:center}
   .chap.rev .chap-txt{padding-bottom:28px}
   .chap-line{display:none}
