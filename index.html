@@ -74,12 +74,12 @@ section{scroll-margin-top:var(--head-h)}
 .sec-lede.addr{color:var(--blue);font-variant:small-caps;letter-spacing:.04em}
 /* ---------- HISTOIRE ---------- */
 .histoire{padding:100px var(--pad);display:flex;flex-direction:column}
-.chap{display:grid;grid-template-columns:1fr 10px 1fr;gap:41px;align-items:stretch;min-height:814px}
+.chap{display:grid;grid-template-columns:1fr 10px 1fr;gap:41px;align-items:center}
 .chap.rev .chap-txt{grid-column:1;align-items:flex-end;text-align:right}
 .chap.rev .chap-line{grid-column:2}
 .chap.rev .chap-img{grid-column:3}
 .chap>*{grid-row:1}
-.chap-img{background-size:cover;background-position:center;min-height:814px;border-radius:2px}
+.chap-img{background-size:cover;background-position:center;aspect-ratio:1/1;border-radius:2px}
 .chap-line{position:relative;display:flex;flex-direction:column;align-items:center}
 .chap-line::before,.chap-line::after{content:"";flex:1;width:0;border-left:1px dashed var(--ink)}
 .chap-dot{width:10px;height:10px;border-radius:50%;background:var(--ink);flex-shrink:0}
@@ -92,7 +92,7 @@ section{scroll-margin-top:var(--head-h)}
 .card{background:var(--cream-2);box-shadow:inset 0 0 0 1px var(--gold);border-radius:20px;padding:20px}
 .prog-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;padding:100px var(--pad);align-items:stretch}
 .prog-card{display:flex;flex-direction:column;gap:25px;align-items:stretch}
-.prog-img{height:520px;background-size:cover;background-position:center}
+.prog-img{aspect-ratio:1/1;background-size:cover;background-position:center;border-radius:8px}
 .prog-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
 .prog-head p{margin:0}
 .prog-day{font-family:var(--disp);font-size:64px;color:var(--red);line-height:1}
