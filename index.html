@@ -125,6 +125,7 @@ section{scroll-margin-top:var(--head-h)}
 .gallery div{aspect-ratio:16/10;background-size:cover;background-position:center;border-radius:2px}
 /* ---------- TRANSPORT ---------- */
 .transport{padding:0 var(--pad) 100px;display:flex;flex-direction:column;gap:50px}
+.transport-note{font-weight:700;font-size:24px;line-height:1.4;color:var(--ink);max-width:820px;margin:0;text-align:center;text-wrap:pretty}
 .transport-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch;min-height:600px}
 #map{border-radius:20px;box-shadow:inset 0 0 0 1px var(--gold);min-height:600px;z-index:0}
 .transport-ill{background:url("img/e15f22c930087551.png") center/contain no-repeat;min-height:600px}
@@ -359,6 +360,7 @@ textarea.input{min-height:130px;resize:vertical}
 
   /* Acces */
   .transport{padding:0 15px 40px;gap:24px}
+  .transport-note{font-size:18px;line-height:1.4}
   .transport-row{display:flex;flex-direction:column;min-height:0;gap:16px}
   #map,.transport-ill{min-height:300px}
   .times{grid-template-columns:1fr;gap:12px}
@@ -514,15 +516,15 @@ textarea.input{min-height:130px;resize:vertical}
 <!-- ===================== HISTOIRE ===================== -->
 <section class="sec-head" id="histoire">
   <div class="badge"><span>1</span></div>
-  <p class="kicker">Vous avez loupé un épisode ?</p>
-  <h2 class="sec-title">Notre Histoire</h2>
-  <p class="sec-lede">Sept songes d’un herbier sentimental pour découvrir comment deux chimères ont fini par se trouver.</p>
+  <p class="kicker">Vous avez loupé un épisode ? On vous refait le film.</p>
+  <h2 class="sec-title">Notre histoire</h2>
+  
 </section>
 <div class="histoire wrap">
   <article class="chap">
     <div class="chap-img" style="background-image:url('img/cafe-guidoline.png')"></div>
     <div class="chap-line"><span class="chap-dot"></span></div>
-    <div class="chap-txt"><div class="chap-head"><p class="chap-date">été 2023</p><h3 class="chap-title">Le Café Guidoline</h3></div><p class="chap-body">Sissi et Guillaume commencent à travailler ensemble sur un même projet, attablés au Café Guidoline à Genève. Ça deviendra leur QG, chargé de souvenirs.</p></div>
+    <div class="chap-txt"><div class="chap-head"><p class="chap-date">été 2023</p><h3 class="chap-title">Le Café Guidoline</h3></div><p class="chap-body">Sissi et Guillaume commencent à travailler ensemble sur un même projet, attablés au Café Guidoline à Genève. Ça deviendra leur QG.</p></div>
   </article>
   <article class="chap rev">
     <div class="chap-img" style="background-image:url('img/27e590f538ba6ead.png')"></div>
@@ -560,25 +562,25 @@ textarea.input{min-height:130px;resize:vertical}
 <section class="sec-head" id="programme">
   <div class="badge"><span>II</span></div>
   <p class="kicker">Le déroulement</p>
-  <h2 class="sec-title">Programme du week-end</h2>
+  <h2 class="sec-title">Programme du week-end</h2>
   <p class="sec-lede">Trois jours de fête hivernale au château.</p>
 </section>
 <div class="prog-grid wrap">
   <div class="card prog-card">
     <div class="prog-img" style="background-image:url('img/a5a8dcb8afbb5443.png')"></div>
     <div class="prog-head"><p class="prog-day">Vendredi</p><p class="prog-daytag">4 décembre 2026</p><p class="prog-dayname">Premières arrivées</p></div>
-    <p class="prog-p">Le vendredi se déroulera en petit comité au château avec la famille proche, les témoins et les officiants qui y séjournent. L'occasion de passer du temps ensemble, de finaliser les derniers préparatifs et de partager un dîner en toute simplicité.<br><br>Les autres invités sont les bienvenus dès le vendredi pour profiter de la région avant les festivités — voir « La région ». Si vous préférez arriver le samedi matin, aucun problème.</p>
+    <p class="prog-p">Nous vous invitons à arriver dès le vendredi afin de voyager sereinement, éviter le stress des trajets le jour du mariage et profiter d’une bonne nuit de repos avant le grand jour. Aucun repas n’est prévu le vendredi pour les invités (à l’exception d’un dîner en petit comité réservé à la famille). C’est donc l’occasion idéale de découvrir la région et de profiter de ses excellentes tables.</p>
   </div>
   <div class="card prog-card">
     <div class="prog-img" style="background-image:url('img/55ea78c513515362.png')"></div>
     <div class="prog-head"><p class="prog-day">Samedi</p><p class="prog-daytag">5 décembre 2026</p><p class="prog-dayname">Le Grand Jour</p></div>
     <div class="sched">
-      <div class="sched-item"><div class="sched-row"><span class="sched-time">Matinée</span><span class="sched-dot">·</span><span class="sched-title">Préparatifs</span></div><p class="prog-p">Prenez votre temps, profitez de la région et préparez-vous pour la fête. Des professionnels seront disponibles au château pour le maquillage et la coiffure (à préciser dans le formulaire de réponse).</p></div>
-      <div class="sched-item"><div class="sched-row"><span class="sched-time">14h30</span><span class="sched-dot">·</span><span class="sched-title">Rendez-vous au château</span></div><p class="prog-p">Accueil des invités autour d'une boisson chaude.</p></div>
+      <div class="sched-item"><div class="sched-row"><span class="sched-time">Matinée</span><span class="sched-dot">·</span><span class="sched-title">Préparatifs</span></div><p class="prog-p">Préparez-vous pour la fête. Des professionnels seront disponibles au château pour le maquillage et la coiffure (à préciser dans le formulaire de réponse). Nous vous recommandons de déjeuner léger car le vin d’honneur promet d’être particulièrement généreux.</p></div>
+      <div class="sched-item"><div class="sched-row"><span class="sched-time">14h30</span><span class="sched-dot">·</span><span class="sched-title">Accueil au château</span></div><p class="prog-p">Le château ouvre enfin ses portes et vous accueille autour d’une boisson chaude.</p></div>
       <div class="sched-item"><div class="sched-row"><span class="sched-time">15h30</span><span class="sched-dot">·</span><span class="sched-title">Cérémonie laïque</span></div><p class="prog-p">Échange de vœux dans l'Orangerie du château.</p></div>
-      <div class="sched-item"><div class="sched-row"><span class="sched-time">16h30</span><span class="sched-dot">·</span><span class="sched-title">Vin d'honneur</span></div><p class="prog-p">Retrouvons-nous dans les salons du château pour le vin d'honneur, accompagné par les Has Been Players.</p></div>
-      <div class="sched-item"><div class="sched-row"><span class="sched-time">19h00</span><span class="sched-dot">·</span><span class="sched-title">Dîner</span></div><p class="prog-p">Un grand dîner d'hiver aux chandelles nous attend dans l'Orangerie.</p></div>
-      <div class="sched-item"><div class="sched-row"><span class="sched-time">21h00</span><span class="sched-dot">·</span><span class="sched-title">Soirée</span></div><p class="prog-p">Time to partyyyyy.</p></div>
+      <div class="sched-item"><div class="sched-row"><span class="sched-time">16h30</span><span class="sched-dot">·</span><span class="sched-title">Vin d'honneur</span></div><p class="prog-p">Ouverture des salons du château pour le vin d'honneur, sur le son des Has Been Players.</p></div>
+      <div class="sched-item"><div class="sched-row"><span class="sched-time">19h00</span><span class="sched-dot">·</span><span class="sched-title">Dîner</span></div><p class="prog-p">Dîner d'hiver aux chandelles dans l'Orangerie.</p></div>
+      <div class="sched-item"><div class="sched-row"><span class="sched-time">21h00</span><span class="sched-dot">·</span><span class="sched-title">Soirée</span></div><p class="prog-p">DJ Ron prend les platines.</p></div>
     </div>
   </div>
   <div class="card prog-card">
@@ -593,7 +595,7 @@ textarea.input{min-height:130px;resize:vertical}
   <div class="badge"><span>III</span></div>
   <p class="kicker">Découvrez le lieu</p>
   <h2 class="sec-title">Le Château de Montplaisant</h2>
-  <p class="sec-lede">Une demeure de caractère nichée à Montagnat, à cinq minutes de Bourg-en-Bresse. Cour, salons et Orangerie nous accueillent pour trois jours hors du temps.</p>
+  <p class="sec-lede">Une demeure du XVIIIème, nichée dans un parc de 4 hectares, à cinq minutes de Bourg-en-Bresse.</p>
 </section>
 <div class="chateau wrap">
   <div class="chateau-hero"></div>
@@ -614,6 +616,7 @@ textarea.input{min-height:130px;resize:vertical}
   <p class="sec-lede addr">Chemin de la Fay, 01250 Montagnat</p>
 </section>
 <div class="transport wrap">
+  <p class="transport-note">Un service de taxi sera mis à disposition le vendredi soir. Nous comptons sur vous pour ne pas prendre votre voiture ce soir-là.</p>
   <div class="transport-row">
     <div id="map"></div>
     <div class="transport-ill"></div>
