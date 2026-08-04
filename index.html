@@ -125,7 +125,7 @@ section{scroll-margin-top:var(--head-h)}
 .gallery div{aspect-ratio:16/10;background-size:cover;background-position:center;border-radius:2px}
 /* ---------- TRANSPORT ---------- */
 .transport{padding:0 var(--pad) 100px;display:flex;flex-direction:column;gap:50px}
-.transport-note{font-weight:700;font-size:32px;line-height:1.28;color:var(--ink);margin:0;text-align:center;text-wrap:pretty;max-width:720px;align-self:center}
+.transport-note{font-weight:700;font-size:32px;line-height:1.28;color:var(--ink);margin:0;text-align:center;text-wrap:pretty;max-width:1100px;align-self:center}
 .transport-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch;min-height:600px}
 #map{border-radius:20px;box-shadow:inset 0 0 0 1px var(--gold);min-height:600px;z-index:0}
 .transport-ill{background:url("img/e15f22c930087551.png") center/contain no-repeat;min-height:600px}
@@ -136,10 +136,10 @@ section{scroll-margin-top:var(--head-h)}
 .time-mode{font-weight:700;font-size:24px;color:var(--ink)}
 /* ---------- HEBERGEMENT ---------- */
 .heberg{display:grid;grid-template-columns:1fr 1fr;gap:100px;padding:100px var(--pad);align-items:start}
-.heberg-ill{background:url("img/ebba0c0e35119cf2.png") 49% 41%/135% 118.6% no-repeat;align-self:stretch;min-height:700px}
+.heberg-ill{background:url("img/ebba0c0e35119cf2.png") center/contain no-repeat;min-height:700px}
 .hotels{display:flex;flex-direction:column;gap:28px}
 .heberg-sub{font-family:var(--disp);font-size:42px;color:var(--red);margin:8px 0 0;line-height:1;font-weight:700;letter-spacing:.02em}
-.hotels-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.hotels-grid{display:flex;flex-direction:column;gap:20px}
 .hotel .hh{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
 .hotel-name{font-family:var(--disp);font-size:32px;color:var(--red);line-height:1}
 .hotel-price{font-family:var(--disp);font-size:32px;color:var(--red)}
@@ -382,7 +382,7 @@ textarea.input{min-height:130px;resize:vertical}
   .heberg{display:flex;flex-direction:column;gap:10px;padding:20px 15px}
   .heberg-ill{min-height:300px;background-size:cover;order:-1}
   .hotels{gap:24px}
-  .hotels-grid{grid-template-columns:1fr;gap:14px}
+  .hotels-grid{flex-direction:column;gap:14px}
   .heberg-sub{font-size:24px}
   .hotel{padding:20px;border-radius:20px}
   .hotel-name{font-size:22px}
@@ -681,7 +681,10 @@ textarea.input{min-height:130px;resize:vertical}
         <div class="hh"><span class="hotel-name">Clos De Mont July</span><span class="hotel-price">€€€</span></div>
         <p class="hotel-meta">Bourg-en-Bresse · environ 8 min</p>
         <p class="hotel-desc">Maison d'hôtes de caractère installée dans une demeure du XVIII<sup>e</sup> siècle, le Clos de Mont July offre un cadre élégant et raffiné avec un magnifique jardin.</p>
-        <div class="hotel-foot"><span class="hotel-tag">Ambiance : Luxe &amp; charme<br>⚠ Quelques chambres uniquement</span></div>
+        <div class="hotel-foot">
+          <span class="hotel-tag">Ambiance : Luxe &amp; charme</span>
+          <span class="hotel-tag">⚠ Quelques chambres uniquement</span>
+        </div>
       </div>
       <div class="card hotel">
         <div class="hh"><span class="hotel-name">La Ferme des Soudanières</span><span class="hotel-price">€€</span></div>
@@ -777,9 +780,8 @@ textarea.input{min-height:130px;resize:vertical}
 <!-- ===================== DREAM TEAM ===================== -->
 <section class="sec-head" id="dreamteam">
   <div class="badge"><span>VII</span></div>
-  <p class="kicker">Ils rendent ce jour spécial</p>
+  <p class="kicker">Découvrez ceux qui rendent la Fête spéciale</p>
   <h2 class="sec-title">La dream team</h2>
-  <p class="sec-lede">Les talents qui veillent à ce que tout soit parfait.</p>
 </section>
 <div class="team wrap">
   <div class="team-row">
@@ -787,7 +789,6 @@ textarea.input{min-height:130px;resize:vertical}
     <div class="team-txt">
       <div><p class="team-role">Nos officiants</p><h3 class="team-name">Camille Lallier &amp; David Granite</h3></div>
       <p class="team-body">Ils nous connaissent mieux que personne : nos deux orateurs préférés animeront la cérémonie laïque du samedi après-midi. Vous souhaitez les contacter pour leur transmettre une anecdote ?</p>
-      <p class="team-body">David Granite :</p>
       <p class="team-body">Camille Lallier : camille.lallier@gmail.com / +33 6 33 78 40 02</p>
     </div>
   </div>
@@ -841,7 +842,7 @@ textarea.input{min-height:130px;resize:vertical}
     </div>
   </div>
   <div class="team-row">
-    <div class="team-img" style="background-image:url('img/38b07fa7ed4d1212.png')"></div>
+    <div class="team-img" style="background-image:url('img/hasbeen.png')"></div>
     <div class="team-txt">
       <div><p class="team-role">Live Band</p><h3 class="team-name">Has Been Players</h3></div>
       <p class="team-body">Groupe de musique de reprises : pop / rock / funk / disco / 80s.</p>
