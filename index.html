@@ -137,25 +137,35 @@ section{scroll-margin-top:var(--head-h)}
 /* ---------- HEBERGEMENT ---------- */
 .heberg{display:grid;grid-template-columns:1fr 1fr;gap:100px;padding:100px var(--pad);align-items:start}
 .heberg-ill{background:url("img/ebba0c0e35119cf2.png") 49% 41%/135% 118.6% no-repeat;align-self:stretch;min-height:700px}
-.hotels{display:flex;flex-direction:column;gap:20px}
+.hotels{display:flex;flex-direction:column;gap:28px}
+.heberg-sub{font-family:var(--disp);font-size:42px;color:var(--red);margin:8px 0 0;line-height:1;font-weight:700;letter-spacing:.02em}
+.hotels-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .hotel .hh{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.hotel-name{font-family:var(--disp);font-size:36px;color:var(--red);line-height:1}
-.hotel-price{font-family:var(--disp);font-size:36px;color:var(--red)}
-.hotel-desc{font-weight:700;font-size:24px;line-height:1.4;margin:14px 0}
+.hotel-name{font-family:var(--disp);font-size:32px;color:var(--red);line-height:1}
+.hotel-price{font-family:var(--disp);font-size:32px;color:var(--red)}
+.hotel-meta{font-weight:700;font-size:18px;color:var(--blue);margin:8px 0 0;line-height:1.3}
+.hotel-desc{font-weight:700;font-size:20px;line-height:1.4;margin:12px 0}
 .hotel-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.hotel-tag{font-weight:700;font-size:16px;color:var(--ink);line-height:1.4}
 .hotel-time{font-weight:700;font-size:24px;white-space:nowrap}
 .pill.sm{font-size:16px;height:44px;padding:10px 24px}
+.heberg-outro{font-weight:700;font-size:20px;line-height:1.4;color:var(--ink);margin:12px 0 0;text-align:center;font-style:italic}
 /* ---------- REGION ---------- */
-.region{display:grid;grid-template-columns:1fr 1fr;gap:50px;padding:100px var(--pad);align-items:center}
-.region-ill{background:url("img/7a787fa94d8e861d.png") 50% 50.3%/111.7% 123.3% no-repeat;align-self:stretch;min-height:700px}
-.region-list{display:flex;flex-direction:column;gap:40px}
-.region-card{display:flex;flex-direction:column}
-.region-card .rt{font-weight:700;font-size:24px;color:var(--red);margin:0;line-height:1.4}
-.region-card .rn{font-family:var(--disp);font-size:48px;color:var(--ink);line-height:1;margin:0 0 10px}
-.region-card .rd{font-weight:700;font-size:32px;line-height:41px;color:var(--ink);margin:0}
-.region-eat .re-title{font-family:var(--disp);font-size:36px;color:var(--red);margin:0 0 20px}
-.region-eat .re-sub{font-weight:700;font-size:24px;line-height:1.4;color:var(--ink)}
-.region-eat .re-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.region{padding:100px var(--pad)}
+.region-cats{display:flex;flex-direction:column;gap:48px;max-width:1200px;margin:0 auto}
+.region-cat{display:flex;flex-direction:column;gap:16px}
+.region-cat-title{font-family:var(--disp);font-size:32px;color:var(--red);margin:0;line-height:1.1;letter-spacing:.02em;text-transform:uppercase}
+.region-cat-list{display:flex;flex-direction:column}
+.region-item{border-top:1px solid rgba(169,122,36,.45);padding:0}
+.region-item:last-child{border-bottom:1px solid rgba(169,122,36,.45)}
+.region-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:24px 4px;font-weight:700;font-size:24px;color:var(--ink);line-height:1.3;transition:color .2s}
+.region-item summary::-webkit-details-marker{display:none}
+.region-item summary::after{content:'+';font-family:var(--disp);font-size:32px;color:var(--red);line-height:1;flex-shrink:0;font-weight:700;transition:transform .25s}
+.region-item[open] summary::after{content:'−'}
+.region-item summary:hover{color:var(--red)}
+.region-item .ri-name{flex:1}
+.region-item .ri-meta{font-family:var(--disp);font-weight:400;font-size:18px;color:var(--blue);white-space:nowrap;letter-spacing:.04em}
+.region-item .ri-body{font-weight:700;font-size:20px;line-height:1.5;color:var(--ink);margin:0;padding:0 4px 24px;max-width:1100px}
 /* ---------- DREAM TEAM ---------- */
 .team{padding:20px var(--pad) 100px;display:flex;flex-direction:column}
 .team-row{display:grid;grid-template-columns:500px 1fr;gap:50px;align-items:start;padding:60px 0}
@@ -371,20 +381,25 @@ textarea.input{min-height:130px;resize:vertical}
   /* Hebergement */
   .heberg{display:flex;flex-direction:column;gap:10px;padding:20px 15px}
   .heberg-ill{min-height:300px;background-size:cover;order:-1}
-  .hotels{grid-template-columns:1fr;gap:10px}
+  .hotels{gap:24px}
+  .hotels-grid{grid-template-columns:1fr;gap:14px}
+  .heberg-sub{font-size:24px}
   .hotel{padding:20px;border-radius:20px}
-  .hotel-name{font-size:20px}
-  .hotel-price{font-size:20px}
-  .hotel-desc,.hotel-time{font-size:16px;line-height:22.4px}
+  .hotel-name{font-size:22px}
+  .hotel-price{font-size:22px}
+  .hotel-meta{font-size:14px}
+  .hotel-desc{font-size:16px;line-height:22.4px}
+  .hotel-tag{font-size:14px;line-height:1.4}
+  .heberg-outro{font-size:16px}
 
   /* Region */
-  .region{display:flex;flex-direction:column;gap:15px;padding:20px 15px}
-  .region-ill{min-height:300px;background-size:cover;order:-1}
-  .region-list{grid-template-columns:1fr;gap:15px}
-  .region-card{padding:15px}
-  .region-card .rn{font-size:18px}
-  .region-card .rt{font-size:24px}
-  .region-card .rd{font-size:18px;line-height:28px}
+  .region{padding:20px 15px}
+  .region-cats{gap:32px}
+  .region-cat-title{font-size:20px}
+  .region-item summary{padding:16px 0;font-size:16px;gap:12px}
+  .region-item summary::after{font-size:24px}
+  .region-item .ri-meta{font-size:14px}
+  .region-item .ri-body{font-size:15px;line-height:22px;padding-bottom:16px}
 
   /* Dream team */
   .team{padding:10px 15px 40px}
@@ -631,53 +646,131 @@ textarea.input{min-height:130px;resize:vertical}
 <!-- ===================== HEBERGEMENT ===================== -->
 <section class="sec-head" id="hebergement">
   <div class="badge"><span>V</span></div>
-  <p class="kicker">où dormir</p>
+  <p class="kicker">Où dormir</p>
   <h2 class="sec-title">Hébergement</h2>
-  <p class="sec-lede">Le château compte 43 couchages disponibles, qui seront principalement réservés pour la famille et les témoins. Le détail et le plan des chambres seront communiqués plus tard.<br><br>Nous invitons le reste des invités à réserver leur hébergement parmi les nombreux hôtels à proximité, dont vous trouverez ci-dessous une petite sélection.<br><br>Team hôtel ou team château ? N’hésitez pas à nous contacter pour en savoir plus.</p>
+  <p class="sec-lede">Le château compte 43 couchages disponibles, qui seront principalement réservés pour la famille et les témoins. Le détail et le plan des chambres seront communiqués plus tard.<br><br>Nous invitons le reste des invités à réserver leur hébergement parmi les nombreux hôtels à proximité, dont vous trouverez ci-dessous une petite sélection.</p>
 </section>
 <div class="heberg wrap">
   <div class="heberg-ill"></div>
   <div class="hotels">
-    <div class="card hotel">
-      <div class="hh"><span class="hotel-name">Greet Hôtel Bourg-en-Bresse</span><span class="hotel-price">€€</span></div>
-      <p class="hotel-desc">Hôtel éco-responsable labellisé Clef Verte, à 5 min de l'A40. Restaurant sur place, parking sécurisé et bornes de recharge.</p>
-      <div class="hotel-foot"><span class="hotel-time">◷ 5 min en voiture</span><a class="pill sm" href="https://www.booking.com/hotel/fr/premiere-classe-bourg-en-bresse-montagnat.fr.html?aid=318615&label=New_French_FR_CH_26234553745-aeTN7caJdBq7XO9QsXukAwS217246282515%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi55746081067%3Atidsa-302962658775%3Alp1002992%3Ali%3Adec%3Adm&sid=f80f7a55eb3790bf956045abbec3486e&all_sr_blocks=42888012_94463804_2_2_0&checkin=2026-12-04&checkout=2026-12-06&dest_id=-1452276&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&highlighted_blocks=42888012_94463804_2_2_0&hpos=1&matching_block_id=42888012_94463804_2_2_0&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=42888012_94463804_2_2_0__11805&srepoch=1785267800&srpvid=734c8aa95d920f0b&type=total&ucfs=1&" target="_blank" rel="noopener">Réserver</a></div>
+    <h3 class="heberg-sub">Les hôtels</h3>
+    <div class="hotels-grid">
+      <div class="card hotel">
+        <div class="hh"><span class="hotel-name">Hôtel Panorama 360</span><span class="hotel-price">€€€</span></div>
+        <p class="hotel-meta">Bourg-en-Bresse · environ 17 min</p>
+        <p class="hotel-desc">Un hôtel 4 étoiles contemporain situé en plein cœur de Bourg-en-Bresse. Chambres spacieuses, Skybar panoramique offrant une vue sur le Revermont et son restaurant. L'hôtel dispose également de chambres communicantes, idéales pour les familles.</p>
+        <div class="hotel-foot"><span class="hotel-tag">Ambiance : Moderne &amp; haut de gamme</span></div>
+      </div>
+      <div class="card hotel">
+        <div class="hh"><span class="hotel-name">Hôtel Le Griffon d'Or</span><span class="hotel-price">€€€</span></div>
+        <p class="hotel-meta">Bourg-en-Bresse · environ 10 min</p>
+        <p class="hotel-desc">Charmant hôtel indépendant, réputé pour son accueil et son élégance.</p>
+        <div class="hotel-foot"><span class="hotel-tag">Ambiance : Boutique hôtel</span></div>
+      </div>
+      <div class="card hotel">
+        <div class="hh"><span class="hotel-name">Greet Hotel Bourg-en-Bresse Sud Montagnat</span><span class="hotel-price">€</span></div>
+        <p class="hotel-meta">Montagnat · environ 5 min</p>
+        <p class="hotel-desc">L'hôtel le plus proche du château. Moderne et confortable, avec un bon rapport qualité/prix.</p>
+        <div class="hotel-foot"><span class="hotel-tag">Ambiance : Moderne &amp; conviviale</span></div>
+      </div>
     </div>
-    <div class="card hotel">
-      <div class="hh"><span class="hotel-name">Les Loges de Brou</span><span class="hotel-price">€€€</span></div>
-      <p class="hotel-desc">Hôtel 3 étoiles de charme avec balcon, à deux pas du Monastère royal de Brou. 30 chambres au calme.</p>
-      <div class="hotel-foot"><span class="hotel-time">◷ 15 min en voiture</span><a class="pill sm" href="https://www.booking.com/hotel/fr/les-loges-de-brou-la-loge-marguerite-d-autriche-amp-la-loge-du-duc-d-albion.fr.html?aid=311984&label=le-logis-de-brou-xrQYY0gBTKLRM9yFhEQpWgS438696295173%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atiaud-2395231936738%3Akwd-38644433388%3Alp1002992%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YTQUGSsRwx9_3qo3uPTHyoo&sid=f80f7a55eb3790bf956045abbec3486e&all_sr_blocks=1532032703_424719617_2_0_0&checkin=2026-12-04&checkout=2026-12-06&dest_id=-1414325&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=2&highlighted_blocks=1532032703_424719617_2_0_0&hpos=2&matching_block_id=1532032703_424719617_2_0_0&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=1532032703_424719617_2_0_0__18522&srepoch=1785267893&srpvid=6a128ad34c50014d&type=total&ucfs=1&" target="_blank" rel="noopener">Réserver</a></div>
+
+    <h3 class="heberg-sub">Les gîtes &amp; maisons</h3>
+    <div class="hotels-grid">
+      <div class="card hotel">
+        <div class="hh"><span class="hotel-name">Clos De Mont July</span><span class="hotel-price">€€€</span></div>
+        <p class="hotel-meta">Bourg-en-Bresse · environ 8 min</p>
+        <p class="hotel-desc">Maison d'hôtes de caractère installée dans une demeure du XVIII<sup>e</sup> siècle, le Clos de Mont July offre un cadre élégant et raffiné avec un magnifique jardin.</p>
+        <div class="hotel-foot"><span class="hotel-tag">Ambiance : Luxe &amp; charme<br>⚠ Quelques chambres uniquement</span></div>
+      </div>
+      <div class="card hotel">
+        <div class="hh"><span class="hotel-name">La Ferme des Soudanières</span><span class="hotel-price">€€</span></div>
+        <p class="hotel-meta">Saint-Rémy · environ 10 min</p>
+        <p class="hotel-desc">Charmant hébergement indépendant, se composant de 1 chambre, d'un salon, d'une cuisine entièrement équipée.</p>
+        <div class="hotel-foot"><span class="hotel-tag">Ambiance : Campagne chic</span></div>
+      </div>
+      <div class="card hotel">
+        <div class="hh"><span class="hotel-name">Les Loges de Brou</span><span class="hotel-price">€€</span></div>
+        <p class="hotel-meta">Bourg-en-Bresse · environ 10 min</p>
+        <p class="hotel-desc">Deux appartements entièrement rénovés dans un cadre plein de charme, avec vue directe sur le magnifique monastère de Brou. Les appartements bénéficient d'une cuisine équipée avec un coin repas.</p>
+        <div class="hotel-foot"><span class="hotel-tag">Ambiance : Appartement de charme<br>Capacité : 2 logements</span></div>
+      </div>
     </div>
-    <div class="card hotel">
-      <div class="hh"><span class="hotel-name">Clos de Mont July</span><span class="hotel-price">€€</span></div>
-      <p class="hotel-desc">Maison d'hôtes de caractère à Ceyzériat, demeure historique de 1802. Parc arboré, petit-déjeuner maison. Noté 9.5/10.</p>
-      <div class="hotel-foot"><span class="hotel-time">◷ 10 min en voiture</span><a class="pill sm" href="https://www.booking.com/hotel/fr/studio-4-dans-une-grange-xviiie-avec-vue-sur-le-revermont.fr.html?aid=318615&label=New_French_FR_CH_26234558305-i2g4zqY_XXDg93%2AEifdN8QS217247707890%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atidsa-140566011625%3Alp1002992%3Ali%3Adec%3Adm&sid=f80f7a55eb3790bf956045abbec3486e&all_sr_blocks=780701302_425820432_2_2_0&checkin=2026-12-04&checkout=2026-12-06&dest_id=-1417606&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&highlighted_blocks=780701302_425820432_2_2_0&hpos=1&matching_block_id=780701302_425820432_2_2_0&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=780701302_425820432_2_2_0__24585&srepoch=1785267950&srpvid=c7378af4ec000016&type=total&ucfs=1&" target="_blank" rel="noopener">Réserver</a></div>
-    </div>
-    <div class="card hotel">
-      <div class="hh"><span class="hotel-name">The Originals Boutique</span><span class="hotel-price">€€</span></div>
-      <p class="hotel-desc">Hôtel 3 étoiles de style Second Empire avec parc de 5000 m². Chambres rénovées face à la gare de Bourg-en-Bresse.</p>
-      <div class="hotel-foot"><span class="hotel-time">◷ 15 min en voiture</span><a class="pill sm" href="https://www.booking.com/hotel/fr/terminus-bourg-en-bresse.fr.html?label=comfort-romans-*TIbSP3akLjHxwN7sqF3YAS541208362441%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atiaud-2395231936738%3Akwd-855516646932%3Alp1002992%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YTQUGSsRwx9_3qo3uPTHyoo&aid=311984&ucfs=1&checkin=2026-12-04&checkout=2026-12-06&dest_id=-1414325&dest_type=city&group_adults=2&no_rooms=1&group_children=0&srpvid=f0ea8b267477034d&srepoch=1785268051&all_sr_blocks=7856701_412437439_0_2_0&highlighted_blocks=7856701_412437439_0_2_0&matching_block_id=7856701_412437439_0_2_0&atlas_src=sr_iw_title" target="_blank" rel="noopener">Réserver</a></div>
-    </div>
+
+    <p class="heberg-outro">Team hôtel ou team château ? Si vous avez un doute, n'hésitez pas à nous contacter.</p>
   </div>
 </div>
 
 <!-- ===================== REGION ===================== -->
 <section class="sec-head" id="region">
   <div class="badge"><span>VI</span></div>
-  <p class="kicker">Explorer</p>
-  <h2 class="sec-title">Découvrir la région</h2>
-  <p class="sec-lede">Profitez de votre séjour pour découvrir le meilleur de la Bresse et de la Bourgogne.</p>
+  <p class="kicker">Visiter les environs</p>
+  <h2 class="sec-title">Découvrir la région</h2>
+  <p class="sec-lede">Profitez de votre séjour pour découvrir le meilleur de la Bresse et de la Bourgogne.</p>
 </section>
 <div class="region wrap">
-  <div class="region-ill"></div>
-  <div class="region-list">
-    <div class="region-card"><p class="rt">À 15 min — Bourg-en-Bresse</p><p class="rn">Monastère Royal de Brou</p><p class="rd">Chef-d'œuvre de l'art gothique flamboyant du XVIᵉ siècle, élu monument préféré des Français en 2014.</p></div>
-    <div class="region-card"><p class="rt">À 1h — Beaune · Mâcon</p><p class="rn">Vignobles de Bourgogne</p><p class="rd">Capturez les prestigieux vignobles de Bourgogne et dégustez des vins d'exception dans un cadre historique.</p></div>
-    <div class="region-card"><p class="rt">À 1h — Vieux Lyon · Fourvière</p><p class="rn">Journée à Lyon</p><p class="rd">Capitale de la gastronomie, Patrimoine mondial UNESCO. Traboules, Presqu'île, Fourvière… une ville incontournable.</p></div>
-    <div class="card region-eat">
-      <p class="re-title">Où manger ?</p>
-      <div class="re-top"><span class="re-sub">Les tables étoilées de Bourg-en-Bresse</span><a class="pill sm" href="https://guide.michelin.com/fr/fr/auvergne-rhone-alpes/bourg-en-bresse/restaurants" target="_blank" rel="noopener" style="text-decoration:underline">Guide Michelin</a></div>
+  <div class="region-cats">
+
+    <div class="region-cat">
+      <h3 class="region-cat-title">Gastronomie et belles tables</h3>
+      <div class="region-cat-list">
+        <details class="region-item">
+          <summary><span class="ri-name">Village Georges Blanc</span><span class="ri-meta">Vonnas · 30 min</span></summary>
+          <p class="ri-body">Bien plus qu'un restaurant : un véritable village gourmand sur près de 5 hectares en bord de rivière, avec hôtel, spa, et cours de cuisine en immersion avec la brigade suivis d'une dégustation. Plusieurs tables, dont le restaurant gastronomique Georges Blanc, 3 étoiles Michelin depuis 1981 avec une cave de plus de 156 000 bouteilles. Réservation à anticiper.</p>
+        </details>
+      </div>
     </div>
+
+    <div class="region-cat">
+      <h3 class="region-cat-title">Visites et patrimoine</h3>
+      <div class="region-cat-list">
+        <details class="region-item">
+          <summary><span class="ri-name">Monastère royal de Brou</span><span class="ri-meta">Bourg-en-Bresse · 15 min</span></summary>
+          <p class="ri-body">Joyau flamboyant du XVI<sup>e</sup> siècle : trois tombeaux sculptés, vitraux et stalles ciselées. Comptez 2h de visite.</p>
+        </details>
+        <details class="region-item">
+          <summary><span class="ri-name">Cité médiévale de Pérouges</span><span class="ri-meta">30 min</span></summary>
+          <p class="ri-body">Village des XIII<sup>e</sup>-XIV<sup>e</sup> siècles en accès libre toute l'année, ruelles pavées et façades à colombages, magique sous la lumière hivernale.</p>
+        </details>
+        <details class="region-item">
+          <summary><span class="ri-name">Abbaye de Cluny</span><span class="ri-meta">1h10</span></summary>
+          <p class="ri-body">L'une des plus grandes églises de la chrétienté médiévale, visite en réalité augmentée, ouverte tous les jours l'hiver de 9h30 à 17h.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="region-cat">
+      <h3 class="region-cat-title">Ateliers</h3>
+      <div class="region-cat-list">
+        <details class="region-item">
+          <summary><span class="ri-name">Dégustations en cave, Mâconnais / Beaujolais</span><span class="ri-meta">45 min à 1h10</span></summary>
+          <p class="ri-body">Visites de cave et dégustations chez des vignerons (Pouilly-Fuissé, Viré-Clessé), en général 1 à 2h pour 10-20 € par personne.</p>
+        </details>
+        <details class="region-item">
+          <summary><span class="ri-name">Brasserie Saint-Clair</span><span class="ri-meta">Montagnat · 5 min</span></summary>
+          <p class="ri-body">Pépite juste à côté du château : brasserie artisanale fondée par quatre amateurs de bière, visite et dégustation de 8 bières suivie d'un mâchon.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="region-cat">
+      <h3 class="region-cat-title">Activités insolites</h3>
+      <div class="region-cat-list">
+        <details class="region-item">
+          <summary><span class="ri-name">Lac Genin</span><span class="ri-meta">Haut-Bugey · 1h</span></summary>
+          <p class="ri-body">Le lac gèle en hiver et permet patinage ou balade sur glace dans un cadre spectaculaire, surnommé le « petit Canada de l'Ain ».</p>
+        </details>
+        <details class="region-item">
+          <summary><span class="ri-name">Fête des Lumières</span><span class="ri-meta">Lyon · 1h05</span></summary>
+          <p class="ri-body">Du 5 au 8 décembre, la ville entière se transforme en galerie d'art lumineuse à ciel ouvert — à combiner avec le marché de Noël.</p>
+        </details>
+        <details class="region-item">
+          <summary><span class="ri-name">Marché de Noël de Bourg-en-Bresse</span><span class="ri-meta">15 min</span></summary>
+          <p class="ri-body">Une trentaine de chalets en centre-ville, généralement de fin novembre au 24 décembre.</p>
+        </details>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -729,24 +822,34 @@ textarea.input{min-height:130px;resize:vertical}
   <div class="team-row">
     <div class="team-img" style="background-image:url('img/550b49a11db3dc3b.png')"></div>
     <div class="team-txt">
-      <div><p class="team-role">Maquilleuse professionnelle</p><h3 class="team-name">Manon Bonhomme</h3></div>
-      <p class="team-quote">« Un équilibre entre naturel et sophistiqué, guidé par votre personnalité. »</p>
-      <p class="team-body">Depuis petite, elle a toujours prêté attention au maquillage des femmes — le mystérieux smoky eyes, les teints légers et ensoleillés l'ont toujours fait rêver.</p>
-      <p class="team-body">Une certaine idée du chic à la française : juste, lumineux et vivant. Son accompagnement est pensé pour vous guider vers la mise en beauté qui vous ressemble et complète votre look final.</p>
-      <p class="team-signup">→ Inscrivez-vous dans le formulaire de réponse</p>
+      <div><p class="team-role">Maquilleuse professionnelle</p><h3 class="team-name">Manon Bonhomme</h3></div>
+      <p class="team-body">Depuis petite, elle a toujours prêté attention au maquillage avec une certaine idée du chic à la française : juste, lumineux et vivant. Manon propose les prestations suivantes :</p>
+      <div class="team-prices">
+        <div class="team-price"><span>Mise en beauté femme</span><b>75€</b></div>
+        <div class="team-price"><span>Mise en beauté homme</span><b>60€</b></div>
+      </div>
+      <p class="team-signup">→ Inscrivez-vous dans le formulaire de réponse pour la mise en beauté prévue le samedi matin.</p>
+      <p class="team-body"><a href="https://www.instagram.com/manonmaquilleuse" target="_blank" rel="noopener">Découvrir son travail sur Instagram ↗</a></p>
     </div>
   </div>
   <div class="team-row">
     <div class="team-img" style="background-image:url('img/b714eb9057e80e67.png')"></div>
     <div class="team-txt">
-      <div><p class="team-role">Coiffeuse professionnelle</p><h3 class="team-name">Julie Archier</h3></div>
-      <p class="team-quote">« Spécialisée dans la coiffure de mariée et des invité(e)s — elle vous sublimera sans vous transformer. »</p>
-      <p class="team-body">Elle vous accompagnera avec douceur et bienveillance dans cette journée si spéciale.</p>
+      <div><p class="team-role">Coiffeuse professionnelle</p><h3 class="team-name">Julie Archier</h3></div>
+      <p class="team-body">Elle vous accompagnera avec douceur et bienveillance :</p>
       <div class="team-prices">
-        <div class="team-price"><span>Brushings, demi-attaches &amp; wavy (cheveux courts)</span><b>60€</b></div>
+        <div class="team-price"><span>Brushings, demi-attaches &amp; wavy (cheveux courts)</span><b>60€</b></div>
         <div class="team-price"><span>Coiffures sophistiquées : chignons, demi-attaches, cheveux longs détachés</span><b>90€</b></div>
       </div>
-      <p class="team-signup">→ Inscrivez-vous dans le formulaire de réponse</p>
+      <p class="team-signup">→ Inscrivez-vous dans le formulaire de réponse pour la mise en beauté prévue le samedi matin.</p>
+      <p class="team-body"><a href="https://www.instagram.com/julie_archier/" target="_blank" rel="noopener">Découvrir son travail sur Instagram ↗</a></p>
+    </div>
+  </div>
+  <div class="team-row">
+    <div class="team-img" style="background-image:url('img/38b07fa7ed4d1212.png')"></div>
+    <div class="team-txt">
+      <div><p class="team-role">Live Band</p><h3 class="team-name">Has Been Players</h3></div>
+      <p class="team-body">Groupe de musique de reprises : pop / rock / funk / disco / 80s.</p>
     </div>
   </div>
 </div>
@@ -826,10 +929,10 @@ initMap();
 
 /* ---------- FAQ ACCORDION ---------- */
 const FAQ=[
- {q:"Je souhaite faire un discours — comment m'organiser ?",ill:"img/faq-discours.png",a:[{em:1,t:"Avec joie ! Pour que la journée reste fluide, discours, surprises et animations sont centralisés par notre coordinatrice."},{t:"Si vous souhaitez prendre la parole, rapprochez-vous d'Emna, qui orchestre l'ensemble des interventions et veille à ménager les plus belles surprises."},{t:"Emna Atrous — emna@celebrons.events · +33 7 65 87 55 35"}]},
- {q:"Puis-je venir avec un enfant ?",ill:"img/faq-enfant.png",a:[{em:1,t:"De parents à parents : nous vous encourageons à profiter pleinement de cette parenthèse… sans enfant."},{t:"Qui n'a jamais rêvé d'une grasse matinée dans un château après une belle fête, réveillé par l'odeur du brunch ? Seuls les enfants de la famille sont prévus pour la célébration."},{t:"Si toutefois une solution de garde vous semble compliquée, n'hésitez pas à nous écrire — nous trouverons une solution ensemble."}]},
- {q:"Y a-t-il un dress code ?",ill:"img/faq-dresscode.png",a:[{em:1,t:"On vous veut parés. Black tie & extravaganza please !"},{t:"Quelques conseils pratiques :"},{list:["Prévoyez des chaussures confortables pour profiter de la campagne.","Pensez à un pull ou une veste (hiver + château = petite fraîcheur)."]}]},
- {q:"Maquillage & coiffure le jour J ?",ill:"img/faq-coiffure.png",a:[{em:1,t:"Full glam, c'est possible — au château, le samedi matin."},{t:"Des professionnels seront disponibles pour le maquillage et la coiffure. Coiffure : 60€ (brushing/demi-attache/wavy) ou 90€ (sophistiquée). Indiquez le nombre de personnes dans le formulaire de réponse pour réserver votre créneau."}]}
+ {q:"Je souhaite faire un discours, comment m'organiser ?",ill:"img/faq-discours.png",a:[{em:1,t:"Avec joie ! Pour que la journée reste fluide, discours, surprises et animations sont centralisés par notre coordinatrice."},{t:"Si vous souhaitez prendre la parole, rapprochez-vous d'Emna, qui orchestre l'ensemble des interventions."},{t:"Emna Atrous — emna@celebrons.events · +33 7 65 87 55 35"}]},
+ {q:"Puis-je venir avec un enfant ?",ill:"img/faq-enfant.png",a:[{em:1,t:"De parents à parents : nous vous encourageons à profiter pleinement de cette parenthèse… sans enfant."},{t:"Qui n'a jamais rêvé d'une grasse matinée dans un château après une belle fête, réveillé par l'odeur du brunch ? Pour l'instant, seuls les enfants de la famille sont prévus dans l'organisation (repas et garde le temps de la soirée)."},{t:"Si toutefois une solution de garde vous semble compliquée à organiser d'ici décembre, n'hésitez pas à nous écrire et nous trouverons une solution ensemble."}]},
+ {q:"Y a-t-il un dress code ?",ill:"img/faq-dresscode.png",a:[{em:1,t:"On vous veut parés pour la Fête. Black tie & extravaganza, faîtes-nous rêver (mais surtout sentez vous à l'aise)."},{t:"Quelques conseils pratiques :"},{list:["Pensez à un pull ou une veste (hiver + château, il peut faire frais).","Prévoyez des chaussures confortables pour profiter de la campagne après le jour J."]}]},
+ {q:"Maquillage & coiffure le jour J ?",ill:"img/faq-coiffure.png",a:[{em:1,t:"Full glam, c'est possible !"},{t:"Des professionnels seront disponibles pour le maquillage et la coiffure le samedi matin. Inscrivez-vous et laissez vous chouchouter."}]}
 ];
 const faqList=document.getElementById('faq-list');
 FAQ.forEach((it,i)=>{
