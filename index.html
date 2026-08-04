@@ -242,9 +242,6 @@ textarea.input{min-height:130px;resize:vertical}
 .stepper .val{width:60px;text-align:center;font-family:var(--disp);font-size:28px}
 .guestcard{border:1px solid rgba(169,122,36,.4);border-radius:14px;padding:18px;margin-bottom:16px;background:#fff}
 .ghead{display:flex;justify-content:space-between;font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);margin-bottom:14px}
-.mealpick{display:flex;gap:10px;flex-wrap:wrap}
-.mealpick .opt{border:1px solid rgba(169,122,36,.5);background:#fff;border-radius:50px;padding:12px 24px;font-family:var(--serif);font-weight:700;font-size:19px;cursor:pointer}
-.mealpick .opt.sel{background:var(--red);color:#fff;border-color:var(--red)}
 .optcheck{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;line-height:1.4;cursor:pointer;padding:8px 0}
 .optcheck input[type=checkbox]{width:20px;height:20px;accent-color:var(--red);cursor:pointer}
 .errmsg{color:var(--red);font-weight:700;font-size:15px;margin-top:6px}
@@ -959,8 +956,7 @@ FAQ.forEach((it,i)=>{
   const RSVP_WEBHOOK_URL='https://script.google.com/macros/s/AKfycbyPHna7JcCjBBOLhjDE2tyT76ta2dzoVnLAxejkfLLxCGrje4WnC41sEtuEBEGwMtk/exec';
   const panel=document.getElementById('rsvp-panel');
   const dayLabels={ven:["Vendredi 4 déc.","premières arrivées"],sam:["Samedi 5 déc.","le grand jour"],dim:["Dimanche 6 déc.","brunch de clôture"],lun:["Lundi 7 déc.","on prolonge encore"]};
-  const meals=[{k:"viande",t:"Viande"},{k:"poisson",t:"Poisson"},{k:"enfant",t:"Menu enfant"}];
-  const newGuest=()=>({nom:"",repas:"",allergies:"",maquille:false,coiffe:false});
+  const newGuest=()=>({nom:"",allergies:"",maquille:false,coiffe:false});
   let f=load()||{attending:null,email:"",days:{ven:false,sam:true,dim:false,lun:false},guests:[newGuest()],chanson:"",message:""};
   let step=0,touched=false,done=false;
   function load(){try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.guests&&s.guests.length&&s.days)return s;}catch(e){}return null;}
@@ -971,12 +967,11 @@ FAQ.forEach((it,i)=>{
     email:!f.email.trim()?"Indiquez votre email":!emailOk()?"Email invalide":"",
     self:!f.guests[0].nom.trim()?"Indiquez votre nom":"",
     days:!(f.days.ven||f.days.sam||f.days.dim||f.days.lun)?"Sélectionnez au moins un jour":"",
-    guests:f.guests.some(g=>!g.nom.trim())?"Renseignez le nom de chaque invité":"",
-    repas:f.guests.some(g=>!g.repas)?"Choisissez un menu pour chaque invité":""
+    guests:f.guests.some(g=>!g.nom.trim())?"Renseignez le nom de chaque invité":""
   };}
   const declined=()=>f.attending===false;
   const STEPS=()=>declined()?["Présence","Un petit mot"]:["Présence","Le groupe","Détails"];
-  function valid(){const e=errs();if(step===0)return!e.attending&&!e.email&&!e.self;if(declined())return true;if(step===1)return!e.days&&!e.guests&&!e.repas;return true;}
+  function valid(){const e=errs();if(step===0)return!e.attending&&!e.email&&!e.self;if(declined())return true;if(step===1)return!e.days&&!e.guests;return true;}
   function scrollTop(){const y=document.getElementById('rsvp').getBoundingClientRect().top+window.scrollY-70;window.scrollTo({top:y,behavior:'smooth'});}
   function setCount(n){const g=f.guests.slice();while(g.length<n)g.push(newGuest());g.length=n;f.guests=g;save();render();}
   const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
@@ -1005,10 +1000,10 @@ FAQ.forEach((it,i)=>{
       f.guests.forEach((g,i)=>{
         h+='<div class="guestcard"><div class="ghead"><span>'+(i===0?'Vous':'Invité n°'+(i+1))+'</span><span>'+(i===0?'responsable de la réservation':'')+'</span></div>'+
           '<div class="field'+(touched&&!g.nom.trim()?' error':'')+'"><label>Prénom &amp; Nom <span class="req">*</span></label><input class="input g-nom" data-i="'+i+'" value="'+esc(g.nom)+'" placeholder="'+(i===0?'Sissi Helleu':'Prénom Nom')+'"></div>'+
-          '<div class="field'+(touched&&!g.repas?' error':'')+'" style="margin-bottom:18px"><label>Plat</label><p class="step-sub" style="margin:0 0 10px">Le plat par défaut est un plat de viande. Un plat de poisson pourra être proposé en substitution pour les personnes ne consommant pas de viande. Merci de nous le communiquer ci-dessous.</p><div class="mealpick">'+meals.map(m=>'<button type="button" class="opt g-meal'+(g.repas===m.k?' sel':'')+'" data-i="'+i+'" data-k="'+m.k+'">'+m.t+'</button>').join('')+'</div></div>'+
-          '<div class="field" style="margin-bottom:18px"><label>Plat de substitution / Allergies / Régime alimentaire / Autres</label><input class="input g-all" data-i="'+i+'" value="'+esc(g.allergies)+'" placeholder="Aucune — ou précisez (gluten, fruits à coque…)"></div>'+
-          '<div class="field" style="margin-bottom:8px"><label class="optcheck"><input type="checkbox" class="g-mk" data-i="'+i+'"'+(g.maquille?' checked':'')+'> Cet invité souhaite être maquillé. <span class="req">(case à cocher)</span></label></div>'+
-          '<div class="field" style="margin-bottom:0"><label class="optcheck"><input type="checkbox" class="g-coif" data-i="'+i+'"'+(g.coiffe?' checked':'')+'> Cet invité souhaite être coiffé. <span class="req">(case à cocher)</span></label></div>'+
+          '<div class="field" style="margin-bottom:18px"><label>Menu</label><p class="step-sub" style="margin:0 0 10px">Le plat par défaut est un plat de viande. Un plat de poisson pourra être proposé en substitution pour les personnes ne consommant pas de viande. Merci de nous le communiquer ci-dessous.</p></div>'+
+          '<div class="field" style="margin-bottom:18px"><input class="input g-all" data-i="'+i+'" value="'+esc(g.allergies)+'" placeholder="Plat de substitution / Allergies / Régime alimentaire / Autres"></div>'+
+          '<div class="field" style="margin-bottom:8px"><label class="optcheck"><input type="checkbox" class="g-mk" data-i="'+i+'"'+(g.maquille?' checked':'')+'> Cet invité souhaite être maquillé.</label></div>'+
+          '<div class="field" style="margin-bottom:0"><label class="optcheck"><input type="checkbox" class="g-coif" data-i="'+i+'"'+(g.coiffe?' checked':'')+'> Cet invité souhaite être coiffé.</label></div>'+
         '</div>';
       });
     }else{
@@ -1037,7 +1032,6 @@ FAQ.forEach((it,i)=>{
     const cp=panel.querySelector('#cnt-p');if(cp)cp.addEventListener('click',()=>setCount(Math.min(10,f.guests.length+1)));
     panel.querySelectorAll('.g-nom').forEach(el=>el.addEventListener('input',()=>{f.guests[+el.dataset.i].nom=el.value;save();}));
     panel.querySelectorAll('.g-all').forEach(el=>el.addEventListener('input',()=>{f.guests[+el.dataset.i].allergies=el.value;save();}));
-    panel.querySelectorAll('.g-meal').forEach(el=>el.addEventListener('click',()=>{f.guests[+el.dataset.i].repas=el.dataset.k;save();render();}));
       panel.querySelectorAll('.g-mk').forEach(el=>el.addEventListener('change',()=>{f.guests[+el.dataset.i].maquille=el.checked;save();}));
       panel.querySelectorAll('.g-coif').forEach(el=>el.addEventListener('change',()=>{f.guests[+el.dataset.i].coiffe=el.checked;save();}));
     const nx=panel.querySelector('#next');if(nx)nx.addEventListener('click',()=>{touched=true;if(!valid()){render();return;}touched=false;step++;render();scrollTop();});
@@ -1053,7 +1047,7 @@ FAQ.forEach((it,i)=>{
         email:payload.email,
         attending:payload.attending,
         jours:payload.days,
-        guests:payload.guests.map(g=>({nom:g.nom,repas:g.repas,allergies:g.allergies,maquille:g.maquille,coiffe:g.coiffe})),
+        guests:payload.guests.map(g=>({nom:g.nom,allergies:g.allergies,maquille:g.maquille,coiffe:g.coiffe})),
         chanson:payload.chanson,
         message:payload.message
       });
@@ -1068,18 +1062,16 @@ FAQ.forEach((it,i)=>{
   function bindInput(id,fn){const el=panel.querySelector('#'+id);if(el)el.addEventListener('input',()=>{fn(el.value);save();});}
   function renderDone(){
     const first=(f.guests[0].nom||'').trim().split(' ')[0];
-    const mc=k=>f.guests.filter(g=>g.repas===k).length;
+    const allAllergies=f.guests.map(g=>(g.allergies||'').trim()).filter(Boolean).join(' · ');
     let h='<div class="rsvp-body"><div class="confirm"><div class="seal">S&amp;G</div>';
     if(declined()){
-      h+='<h3>Merci pour votre réponse</h3><p>Nous sommes désolés de ne pas vous voir, '+esc(first)+'. Merci pour votre message — on pense à vous le jour J.</p>';
+      h+='<h3>Merci pour votre réponse</h3><p>Nous sommes désolés de ne pas vous voir, '+esc(first)+'. Merci pour votre message — on pense à vous le jour J.</p>';
     }else{
       const days=[f.days.ven&&'Ven',f.days.sam&&'Sam',f.days.dim&&'Dim',f.days.lun&&'Lun'].filter(Boolean).join(' · ')||'—';
-      const menus=[mc('viande')&&mc('viande')+' viande',mc('poisson')&&mc('poisson')+' poisson',mc('enfant')&&mc('enfant')+' enfant'].filter(Boolean).join(' · ')||'—';
-      h+='<h3>C’est noté, merci !</h3><p>Votre réponse est enregistrée, '+esc(first)+'. On a hâte de célébrer ce week-end d’hiver avec vous au Château de Montplaisant.</p>';
+      h+='<h3>C’est noté, merci !</h3><p>Votre réponse est enregistrée, '+esc(first)+'. On a hâte de célébrer ce week-end d’hiver avec vous au Château de Montplaisant.</p>';
       h+='<div class="recap"><div class="r"><span class="k">Invité(s)</span><span class="v">'+f.guests.length+'</span></div>'+
         '<div class="r"><span class="k">Présence</span><span class="v">'+days+'</span></div>'+
-        '<div class="r"><span class="k">Menus</span><span class="v">'+menus+'</span></div>'+
-        (f.guests.some(g=>(g.allergies||'').trim())?'<div class="r"><span class="k">Allergies</span><span class="v">Signalées ✦</span></div>':'')+
+        (allAllergies?'<div class="r"><span class="k">Précisions repas</span><span class="v">'+esc(allAllergies)+'</span></div>':'')+
         (f.chanson?'<div class="r"><span class="k">Playlist</span><span class="v">'+esc(f.chanson)+'</span></div>':'')+'</div>';
     }
     h+='<div style="margin-top:28px"><button class="btn link" id="reset">Modifier notre réponse</button></div></div></div>';
