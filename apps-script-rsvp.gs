@@ -1,6 +1,6 @@
 /**
  * Web app — Réception RSVP mariage S&G
- * v4 — Format Sheet "1 ligne par invité" + 4 colonnes jours séparées
+ * v5 — Suppression colonne Menu (formulaire n'a plus de choix viande/poisson/enfant)
  *
  * À déployer : Extensions > Apps Script > Déployer > Gérer les déploiements > ✏️ > "Nouvelle version" > Déployer
  * Exécuter en tant que : Moi
@@ -10,7 +10,7 @@ const SHEET_NAME = 'Réponses';
 const SHEET_ID = 0; // ID de la feuille "Réponses" (vérifier avec SpreadsheetApp.getActiveSpreadsheet().getSheets()[0].getSheetId())
 const RSVP_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyPHna7JcCjBBOLhjDE2tyT76ta2dzoVnLAxejkfLLxCGrje4WnC41sEtuEBEGwMtk/exec';
 
-// En-têtes (dans l'ordre exact du Sheet)
+// En-têtes (dans l'ordre exact du Sheet) — v5 : 12 colonnes (Menu supprimé)
 const HEADERS = [
   'Date',                  // A
   'Email',                 // B
@@ -21,10 +21,9 @@ const HEADERS = [
   'Sam 5',                 // G
   'Dim 6',                 // H
   'Lun 7',                 // I
-  'Menu',                  // J
-  'Allergies',             // K
-  'Chanson',               // L
-  'Message'                // M
+  'Allergies',             // J
+  'Chanson',               // K
+  'Message'                // L
 ];
 
 function doGet(e) {
@@ -48,7 +47,7 @@ function doPost(e) {
     if (lastRow > 1) {
       const startRow = Math.max(2, lastRow - 20);
       const numRows = Math.min(20, lastRow - 1);
-      const lastRows = sheet.getRange(startRow, 1, numRows, 13).getValues();
+      const lastRows = sheet.getRange(startRow, 1, numRows, HEADERS.length).getValues();
       for (const r of lastRows) {
         const ts = r[0];
         if (ts && (now - ts) < 60000 && r[1] === data.email && r[3] === (guests[0] && guests[0].nom)) {
@@ -59,7 +58,7 @@ function doPost(e) {
       }
     }
 
-    // S'assurer que les en-têtes existent (v4 : 13 colonnes)
+    // S'assurer que les en-têtes existent (v5 : 12 colonnes)
     const existingHeaders = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
     const headersUpToDate = HEADERS.every((h, i) => existingHeaders[i] === h);
     if (!headersUpToDate) {
@@ -84,7 +83,7 @@ function doPost(e) {
     // Responsable = nom du guest principal (1er guest)
     const responsable = (guests[0] && guests[0].nom) || '';
 
-    // v4 : une ligne par invité
+    // v5 : une ligne par invité (Menu supprimé)
     const rows = guests.map((g, i) => [
       now,                          // A: Date (identique pour tout le groupe)
       data.email || '',             // B: Email (identique pour tout le groupe)
@@ -95,10 +94,9 @@ function doPost(e) {
       joursCols.sam,                // G
       joursCols.dim,                // H
       joursCols.lun,                // I
-      g.repas || '',                // J: Menu
-      g.allergies || '',            // K: Allergies
-      i === 0 ? (data.chanson || '') : '',  // L: Chanson (1ère ligne seulement)
-      i === 0 ? (data.message || '') : ''   // M: Message (1ère ligne seulement)
+      g.allergies || '',            // J: Allergies / précisions repas
+      i === 0 ? (data.chanson || '') : '',  // K: Chanson (1ère ligne seulement)
+      i === 0 ? (data.message || '') : ''   // L: Message (1ère ligne seulement)
     ]);
 
     // Append en bloc (plus rapide que N appendRow)
@@ -112,13 +110,6 @@ function doPost(e) {
         .setAllowInvalid(false)
         .build();
       sheet.getRange(startRow, 5, rows.length, 5).setDataValidation(validationRule);
-
-      // Dropdown Menu sur la colonne J
-      const menuRule = SpreadsheetApp.newDataValidation()
-        .requireValueInList(['viande', 'poisson', 'enfant'], true)
-        .setAllowInvalid(true)
-        .build();
-      sheet.getRange(startRow, 10, rows.length, 1).setDataValidation(menuRule);
     }
 
     return ContentService
