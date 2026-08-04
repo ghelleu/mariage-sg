@@ -245,6 +245,8 @@ textarea.input{min-height:130px;resize:vertical}
 .mealpick{display:flex;gap:10px;flex-wrap:wrap}
 .mealpick .opt{border:1px solid rgba(169,122,36,.5);background:#fff;border-radius:50px;padding:12px 24px;font-family:var(--serif);font-weight:700;font-size:19px;cursor:pointer}
 .mealpick .opt.sel{background:var(--red);color:#fff;border-color:var(--red)}
+.optcheck{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;line-height:1.4;cursor:pointer;padding:8px 0}
+.optcheck input[type=checkbox]{width:20px;height:20px;accent-color:var(--red);cursor:pointer}
 .errmsg{color:var(--red);font-weight:700;font-size:15px;margin-top:6px}
 .field.error .input{border-color:var(--red)}
 .rsvp-foot{display:flex;justify-content:space-between;align-items:center;padding:24px 40px 32px;gap:16px;flex-wrap:wrap}
@@ -816,6 +818,14 @@ textarea.input{min-height:130px;resize:vertical}
     </div>
   </div>
   <div class="team-row">
+    <div class="team-img" style="background-image:url('img/hasbeen.png')"></div>
+    <div class="team-txt">
+      <div><p class="team-role">Live Band</p><h3 class="team-name">Has Been Players</h3></div>
+      <p class="team-body">Groupe de musique de reprises : pop / rock / funk / disco / 80s.</p>
+    </div>
+  </div>
+
+  <div class="team-row">
     <div class="team-img" style="background-image:url('img/550b49a11db3dc3b.png')"></div>
     <div class="team-txt">
       <div><p class="team-role">Maquilleuse professionnelle</p><h3 class="team-name">Manon Bonhomme</h3></div>
@@ -839,13 +849,6 @@ textarea.input{min-height:130px;resize:vertical}
       </div>
       <p class="team-signup">→ Inscrivez-vous dans le formulaire de réponse pour la mise en beauté prévue le samedi matin.</p>
       <p class="team-body"><a href="https://www.instagram.com/julie_archier/" target="_blank" rel="noopener">Découvrir son travail sur Instagram ↗</a></p>
-    </div>
-  </div>
-  <div class="team-row">
-    <div class="team-img" style="background-image:url('img/hasbeen.png')"></div>
-    <div class="team-txt">
-      <div><p class="team-role">Live Band</p><h3 class="team-name">Has Been Players</h3></div>
-      <p class="team-body">Groupe de musique de reprises : pop / rock / funk / disco / 80s.</p>
     </div>
   </div>
 </div>
@@ -957,7 +960,7 @@ FAQ.forEach((it,i)=>{
   const panel=document.getElementById('rsvp-panel');
   const dayLabels={ven:["Vendredi 4 déc.","premières arrivées"],sam:["Samedi 5 déc.","le grand jour"],dim:["Dimanche 6 déc.","brunch de clôture"],lun:["Lundi 7 déc.","on prolonge encore"]};
   const meals=[{k:"viande",t:"Viande"},{k:"poisson",t:"Poisson"},{k:"enfant",t:"Menu enfant"}];
-  const newGuest=()=>({nom:"",repas:"",allergies:""});
+  const newGuest=()=>({nom:"",repas:"",allergies:"",maquille:false,coiffe:false});
   let f=load()||{attending:null,email:"",days:{ven:false,sam:true,dim:false,lun:false},guests:[newGuest()],chanson:"",message:""};
   let step=0,touched=false,done=false;
   function load(){try{const s=JSON.parse(localStorage.getItem(LS));if(s&&s.guests&&s.guests.length&&s.days)return s;}catch(e){}return null;}
@@ -987,13 +990,13 @@ FAQ.forEach((it,i)=>{
         choice('att-yes',f.attending===true,'Avec joie, nous serons là')+
         choice('att-no',f.attending===false,'Malheureusement, nous déclinons')+
         '</div>'+(touched&&e.attending?'<div class="errmsg">'+e.attending+'</div>':'')+'</div>';
-      h+='<div class="grid2" style="margin-top:8px"><div class="field'+(touched&&e.self?' error':'')+'"><label>Votre prénom &amp; nom <span class="req">*</span></label><input class="input" id="i-self" value="'+esc(f.guests[0].nom)+'" placeholder="Sissi Helleu">'+(touched&&e.self?'<div class="errmsg">'+e.self+'</div>':'')+'</div>'+
+      h+='<div class="grid2" style="margin-top:8px"><div class="field'+(touched&&e.self?' error':'')+'"><label>Votre Prénom &amp; Nom <span class="req">*</span></label><input class="input" id="i-self" value="'+esc(f.guests[0].nom)+'" placeholder="Sissi Helleu">'+(touched&&e.self?'<div class="errmsg">'+e.self+'</div>':'')+'</div>'+
         '<div class="field'+(touched&&e.email?' error':'')+'"><label>Email <span class="req">*</span></label><input class="input" id="i-email" value="'+esc(f.email)+'" placeholder="vous@email.com">'+(touched&&e.email?'<div class="errmsg">'+e.email+'</div>':'')+'</div></div>';
     }else if(declined()&&step===1){
       h+='<h3 class="step-head">Un petit mot ?</h3><p class="step-sub">Nous sommes tristes de ne pas vous compter parmi nous. Laissez-nous un message si le cœur vous en dit.</p>';
       h+='<div class="field"><label>Votre message aux mariés (facultatif)</label><textarea class="input" id="i-msg" placeholder="Tous nos vœux de bonheur…">'+esc(f.message)+'</textarea></div>';
     }else if(!declined()&&step===1){
-      h+='<h3 class="step-head">Votre groupe</h3><p class="step-sub">Combien serez-vous, vous compris ? Renseignez le menu et d’éventuelles allergies pour chacun.</p>';
+      h+='<h3 class="step-head">Votre groupe</h3><p class="step-sub">Combien serez-vous, vous compris ? Renseignez les éventuelles allergies et contraintes alimentaires de chacun.</p>';
       h+='<div class="field"><label>Nombre d’invités (vous compris)</label><div class="stepper"><button type="button" id="cnt-m">–</button><div class="val">'+f.guests.length+'</div><button type="button" id="cnt-p">+</button></div></div>';
       h+='<div class="field'+(touched&&e.days?' error':'')+'"><label>Jours de présence <span class="req">*</span></label><div class="choices">'+
         Object.keys(dayLabels).map(k=>choice('day-'+k,f.days[k],dayLabels[k][0],dayLabels[k][1])).join('')+
@@ -1001,19 +1004,22 @@ FAQ.forEach((it,i)=>{
       h+='<label class="field" style="display:block;margin-bottom:14px">Vos invités</label>';
       f.guests.forEach((g,i)=>{
         h+='<div class="guestcard"><div class="ghead"><span>'+(i===0?'Vous':'Invité n°'+(i+1))+'</span><span>'+(i===0?'responsable de la réservation':'')+'</span></div>'+
-          '<div class="field'+(touched&&!g.nom.trim()?' error':'')+'"><label>Prénom &amp; nom <span class="req">*</span></label><input class="input g-nom" data-i="'+i+'" value="'+esc(g.nom)+'" placeholder="'+(i===0?'Sissi Helleu':'Prénom Nom')+'"></div>'+
-          '<div class="field'+(touched&&!g.repas?' error':'')+'" style="margin-bottom:18px"><label>Menu <span class="req">*</span></label><div class="mealpick">'+meals.map(m=>'<button type="button" class="opt g-meal'+(g.repas===m.k?' sel':'')+'" data-i="'+i+'" data-k="'+m.k+'">'+m.t+'</button>').join('')+'</div></div>'+
-          '<div class="field" style="margin-bottom:0"><label>Allergies / régime alimentaire (facultatif)</label><input class="input g-all" data-i="'+i+'" value="'+esc(g.allergies)+'" placeholder="Aucune — ou précisez (gluten, fruits à coque…)"></div></div>';
+          '<div class="field'+(touched&&!g.nom.trim()?' error':'')+'"><label>Prénom &amp; Nom <span class="req">*</span></label><input class="input g-nom" data-i="'+i+'" value="'+esc(g.nom)+'" placeholder="'+(i===0?'Sissi Helleu':'Prénom Nom')+'"></div>'+
+          '<div class="field'+(touched&&!g.repas?' error':'')+'" style="margin-bottom:18px"><label>Plat</label><p class="step-sub" style="margin:0 0 10px">Le plat par défaut est un plat de viande. Un plat de poisson pourra être proposé en substitution pour les personnes ne consommant pas de viande. Merci de nous le communiquer ci-dessous.</p><div class="mealpick">'+meals.map(m=>'<button type="button" class="opt g-meal'+(g.repas===m.k?' sel':'')+'" data-i="'+i+'" data-k="'+m.k+'">'+m.t+'</button>').join('')+'</div></div>'+
+          '<div class="field" style="margin-bottom:18px"><label>Plat de substitution / Allergies / Régime alimentaire / Autres</label><input class="input g-all" data-i="'+i+'" value="'+esc(g.allergies)+'" placeholder="Aucune — ou précisez (gluten, fruits à coque…)"></div>'+
+          '<div class="field" style="margin-bottom:8px"><label class="optcheck"><input type="checkbox" class="g-mk" data-i="'+i+'"'+(g.maquille?' checked':'')+'> Cet invité souhaite être maquillé. <span class="req">(case à cocher)</span></label></div>'+
+          '<div class="field" style="margin-bottom:0"><label class="optcheck"><input type="checkbox" class="g-coif" data-i="'+i+'"'+(g.coiffe?' checked':'')+'> Cet invité souhaite être coiffé. <span class="req">(case à cocher)</span></label></div>'+
+        '</div>';
       });
     }else{
       h+='<h3 class="step-head">Derniers détails</h3><p class="step-sub">Le morceau qui vous fera danser, et un petit mot si le cœur vous en dit.</p>';
-      h+='<div class="field"><label>♪ Une chanson pour la playlist de la soirée</label><input class="input" id="i-song" value="'+esc(f.chanson)+'" placeholder="« Superstition » — Stevie Wonder"></div>';
+      h+='<div class="field"><label>Une chanson pour la playlist de la soirée</label><input class="input" id="i-song" value="'+esc(f.chanson)+'" placeholder="« Superstition » — Stevie Wonder"></div>';
       h+='<div class="field"><label>Message aux mariés (facultatif)</label><textarea class="input" id="i-msg" placeholder="Un mot, un vœu, une anecdote…">'+esc(f.message)+'</textarea></div>';
-      h+='<p class="step-sub" style="margin-top:20px;margin-bottom:0">✦ Un discours ou une surprise à préparer ? Contactez notre coordinatrice Emna, elle centralise tout.</p>';
+      h+='<p class="step-sub" style="margin-top:20px;margin-bottom:0">Un discours ou une surprise à préparer ? Contactez notre coordinatrice Emna, elle centralise tout. emna@celebrons.events +33 7 65 87 55 35</p>';
     }
     h+='</div><div class="rsvp-foot">'+
       (step>0?'<button class="btn ghost" id="back">← Retour</button>':'<span class="stepcount">Étape '+(step+1)+' / '+S.length+'</span>')+
-      (step<last?'<button class="btn primary" id="next">Continuer →</button>':'<button class="btn primary" id="send">Envoyer notre réponse ✦</button>')+
+      (step<last?'<button class="btn primary" id="next">Continuer →</button>':'<button class="btn primary" id="send">Envoyer notre réponse</button>')+
       '</div>';
     panel.innerHTML=h;bind();
   }
@@ -1032,6 +1038,8 @@ FAQ.forEach((it,i)=>{
     panel.querySelectorAll('.g-nom').forEach(el=>el.addEventListener('input',()=>{f.guests[+el.dataset.i].nom=el.value;save();}));
     panel.querySelectorAll('.g-all').forEach(el=>el.addEventListener('input',()=>{f.guests[+el.dataset.i].allergies=el.value;save();}));
     panel.querySelectorAll('.g-meal').forEach(el=>el.addEventListener('click',()=>{f.guests[+el.dataset.i].repas=el.dataset.k;save();render();}));
+      panel.querySelectorAll('.g-mk').forEach(el=>el.addEventListener('change',()=>{f.guests[+el.dataset.i].maquille=el.checked;save();}));
+      panel.querySelectorAll('.g-coif').forEach(el=>el.addEventListener('change',()=>{f.guests[+el.dataset.i].coiffe=el.checked;save();}));
     const nx=panel.querySelector('#next');if(nx)nx.addEventListener('click',()=>{touched=true;if(!valid()){render();return;}touched=false;step++;render();scrollTop();});
     const bk=panel.querySelector('#back');if(bk)bk.addEventListener('click',()=>{touched=false;step--;render();});
     const sd=panel.querySelector('#send');if(sd)sd.addEventListener('click',()=>{touched=true;if(!valid()){render();return;}submitRSVP(f);done=true;render();scrollTop();});
@@ -1045,7 +1053,7 @@ FAQ.forEach((it,i)=>{
         email:payload.email,
         attending:payload.attending,
         jours:payload.days,
-        guests:payload.guests,
+        guests:payload.guests.map(g=>({nom:g.nom,repas:g.repas,allergies:g.allergies,maquille:g.maquille,coiffe:g.coiffe})),
         chanson:payload.chanson,
         message:payload.message
       });
