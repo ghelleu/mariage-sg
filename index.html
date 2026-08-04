@@ -1007,10 +1007,12 @@ FAQ.forEach((it,i)=>{
         '</div>';
       });
     }else{
-      h+='<h3 class="step-head">Derniers détails</h3><p class="step-sub">Le morceau qui vous fera danser, et un petit mot si le cœur vous en dit.</p>';
-      h+='<div class="field"><label>Une chanson pour la playlist de la soirée</label><input class="input" id="i-song" value="'+esc(f.chanson)+'" placeholder="« Superstition » — Stevie Wonder"></div>';
-      h+='<div class="field"><label>Message aux mariés (facultatif)</label><textarea class="input" id="i-msg" placeholder="Un mot, un vœu, une anecdote…">'+esc(f.message)+'</textarea></div>';
-      h+='<p class="step-sub" style="margin-top:20px;margin-bottom:0">Un discours ou une surprise à préparer ? Contactez notre coordinatrice Emna, elle centralise tout. emna@celebrons.events +33 7 65 87 55 35</p>';
+      h+='<h3 class="step-head">Derniers détails</h3>';
+      h+='<p class="step-sub">Un discours ou une surprise à préparer ? Contactez notre coordinatrice Emna, elle centralise tout.</p>';
+      h+='<p class="step-sub" style="margin:6px 0 18px"><a href="mailto:emna@celebrons.events">emna@celebrons.events</a><br>+33 7 65 87 55 35</p>';
+      h+='<p class="step-sub" style="margin-top:8px">Le morceau qui vous fera danser, et un petit mot si le cœur vous en dit.</p>';
+      h+='<div class="field"><label>Une chanson pour la playlist de la soirée</label><input class="input" id="i-song" value="'+esc(f.chanson)+'" placeholder="« Superstition » — Stevie Wonder"></div>';
+      h+='<div class="field"><label>Message aux mariés (facultatif)</label><textarea class="input" id="i-msg" placeholder="Un mot, un vœu, une anecdote…">'+esc(f.message)+'</textarea></div>';
     }
     h+='</div><div class="rsvp-foot">'+
       (step>0?'<button class="btn ghost" id="back">← Retour</button>':'<span class="stepcount">Étape '+(step+1)+' / '+S.length+'</span>')+
