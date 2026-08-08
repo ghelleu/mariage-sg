@@ -1,29 +1,30 @@
 /**
  * Web app — Réception RSVP mariage S&G
- * v5 — Suppression colonne Menu (formulaire n'a plus de choix viande/poisson/enfant)
+ * v6 — Ajout colonnes Maquillage + Coiffure (14 colonnes)
  *
  * À déployer : Extensions > Apps Script > Déployer > Gérer les déploiements > ✏️ > "Nouvelle version" > Déployer
  * Exécuter en tant que : Moi
  * Accès : Tout le monde
  */
 const SHEET_NAME = 'Réponses';
-const SHEET_ID = 0; // ID de la feuille "Réponses" (vérifier avec SpreadsheetApp.getActiveSpreadsheet().getSheets()[0].getSheetId())
 const RSVP_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyPHna7JcCjBBOLhjDE2tyT76ta2dzoVnLAxejkfLLxCGrje4WnC41sEtuEBEGwMtk/exec';
 
-// En-têtes (dans l'ordre exact du Sheet) — v5 : 12 colonnes (Menu supprimé)
+// En-têtes (dans l'ordre exact du Sheet) — v6 : 14 colonnes
 const HEADERS = [
-  'Date',                  // A
-  'Email',                 // B
-  'Responsable réservation', // C
-  'Prénom & Nom',          // D
-  'Présence',              // E
-  'Ven 4',                 // F
-  'Sam 5',                 // G
-  'Dim 6',                 // H
-  'Lun 7',                 // I
-  'Allergies',             // J
-  'Chanson',               // K
-  'Message'                // L
+  'Date',                    // A
+  'Email',                   // B
+  'Responsable reservation', // C
+  'Prenom & Nom',            // D
+  'Presence',                // E
+  'Ven 4',                   // F
+  'Sam 5',                   // G
+  'Dim 6',                   // H
+  'Lun 7',                   // I
+  'Allergies',               // J
+  'Maquillage',              // K
+  'Coiffure',                // L
+  'Chanson',                 // M
+  'Message'                  // N
 ];
 
 function doGet(e) {
@@ -40,9 +41,8 @@ function doPost(e) {
     const sheet = ss.getSheetByName(SHEET_NAME);
     if (!sheet) throw new Error('Sheet "' + SHEET_NAME + '" introuvable');
 
-    // Anti-doublon simple : si email + N invités identiques dans les 60 dernières secondes
+    // Anti-doublon simple : si email + nom responsable identiques dans les 60 dernières secondes
     const guests = data.guests || [];
-    const nbInvites = guests.length;
     const lastRow = sheet.getLastRow();
     if (lastRow > 1) {
       const startRow = Math.max(2, lastRow - 20);
@@ -58,7 +58,7 @@ function doPost(e) {
       }
     }
 
-    // S'assurer que les en-têtes existent (v5 : 12 colonnes)
+    // S'assurer que les en-têtes existent (v6 : 14 colonnes)
     const existingHeaders = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
     const headersUpToDate = HEADERS.every((h, i) => existingHeaders[i] === h);
     if (!headersUpToDate) {
@@ -70,7 +70,7 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
 
-    // v4 : jours éclatés en 4 colonnes
+    // Jours éclatés en 4 colonnes OUI/NON
     const jours = (data.jours || data.days || {});
     const joursCols = {
       ven: jours.ven ? 'OUI' : 'NON',
@@ -83,20 +83,22 @@ function doPost(e) {
     // Responsable = nom du guest principal (1er guest)
     const responsable = (guests[0] && guests[0].nom) || '';
 
-    // v5 : une ligne par invité (Menu supprimé)
+    // v6 : une ligne par invité (14 colonnes)
     const rows = guests.map((g, i) => [
       now,                          // A: Date (identique pour tout le groupe)
       data.email || '',             // B: Email (identique pour tout le groupe)
       responsable,                  // C: Responsable réservation (identique pour tout le groupe)
       g.nom || '',                  // D: Prénom & Nom (cet invité)
-      presence,                     // E: Présence (identique pour tout le groupe)
-      joursCols.ven,                // F
-      joursCols.sam,                // G
-      joursCols.dim,                // H
-      joursCols.lun,                // I
+      presence,                     // E: Présence
+      joursCols.ven,                // F: Ven 4
+      joursCols.sam,                // G: Sam 5
+      joursCols.dim,                // H: Dim 6
+      joursCols.lun,                // I: Lun 7
       g.allergies || '',            // J: Allergies / précisions repas
-      i === 0 ? (data.chanson || '') : '',  // K: Chanson (1ère ligne seulement)
-      i === 0 ? (data.message || '') : ''   // L: Message (1ère ligne seulement)
+      g.maquille ? 'OUI' : 'NON',   // K: Maquillage
+      g.coiffe ? 'OUI' : 'NON',     // L: Coiffure
+      i === 0 ? (data.chanson || '') : '',  // M: Chanson (1ère ligne seulement)
+      i === 0 ? (data.message || '') : ''   // N: Message (1ère ligne seulement)
     ]);
 
     // Append en bloc (plus rapide que N appendRow)
@@ -104,12 +106,17 @@ function doPost(e) {
       const startRow = sheet.getLastRow() + 1;
       sheet.getRange(startRow, 1, rows.length, HEADERS.length).setValues(rows);
 
-      // Dropdowns OUI/NON sur les colonnes E, F, G, H, I (Présence + 4 jours)
+      // Dropdowns OUI/NON sur les colonnes E, F, G, H, I (Présence + 4 jours) + K, L (Maquillage, Coiffure)
       const validationRule = SpreadsheetApp.newDataValidation()
         .requireValueInList(['OUI', 'NON'], true)
         .setAllowInvalid(false)
         .build();
+      
+      // Colonnes E-I (Présence + 4 jours) : range contiguë
       sheet.getRange(startRow, 5, rows.length, 5).setDataValidation(validationRule);
+      
+      // Colonnes K-L (Maquillage, Coiffure) : range contiguë
+      sheet.getRange(startRow, 11, rows.length, 2).setDataValidation(validationRule);
     }
 
     return ContentService
