@@ -1,13 +1,19 @@
 /**
  * Web app — Réception RSVP mariage S&G
- * v6 — Ajout colonnes Maquillage + Coiffure (14 colonnes)
+ * v6 — Standalone script lié au GSheet via openById. 14 colonnes, 1 ligne par invité.
  *
- * À déployer : Extensions > Apps Script > Déployer > Gérer les déploiements > ✏️ > "Nouvelle version" > Déployer
- * Exécuter en tant que : Moi
- * Accès : Tout le monde
+ * Déployé via l'API Apps Script (Aug 2026) :
+ *   - Projet standalone : scriptId 1axEmdTtIPbeBPmZSRb3DKJsZKv82J46B9tFFbTAMvi4Vz7-QCLSQaIeL
+ *   - Accès : ANYONE_ANONYMOUS (webhook public appelé depuis le site, sans login Google)
+ *   - Execute as : USER_DEPLOYING (Guillaume)
+ *   - URL : https://script.google.com/macros/s/AKfycbzU-i6rvPiEYDccK9fMwoVLHYRn-U0NSLF8QSziKVPJ1D66aYp20ldY88SuF0xStFJQVw/exec
+ *
+ * PIEGE CLE : un déploiement en accès "ANYONE" (pas _ANONYMOUS) renvoie 401 sur
+ * un POST depuis un navigateur non-loggué. Il FAUT "ANYONE_ANONYMOUS" pour un
+ * webhook public. C'est la cause du bug initial (données en vrac).
  */
+const SHEET_ID = '1OA4_GAmPu3crn5g6ovQWzvrs3yVnYaJseZjgisX1_8s';
 const SHEET_NAME = 'Réponses';
-const RSVP_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyPHna7JcCjBBOLhjDE2tyT76ta2dzoVnLAxejkfLLxCGrje4WnC41sEtuEBEGwMtk/exec';
 
 // En-têtes (dans l'ordre exact du Sheet) — v6 : 14 colonnes
 const HEADERS = [
@@ -37,7 +43,7 @@ function doPost(e) {
   const now = new Date();
   try {
     const data = JSON.parse(e.postData.contents);
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const ss = SpreadsheetApp.openById(SHEET_ID);
     const sheet = ss.getSheetByName(SHEET_NAME);
     if (!sheet) throw new Error('Sheet "' + SHEET_NAME + '" introuvable');
 
